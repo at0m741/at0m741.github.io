@@ -1,4 +1,4 @@
- Debugging de bas niveau sur iOS
+ ### Debugging de bas niveau sur iOS
 
 By at0m741
 
@@ -8,7 +8,7 @@ By at0m741
 
 iBoot est le second composants de la chaine de démarrage des appareils iOS d’Apple, il est le plus gros et gère bon nombres de fonctions dont le chargement du kernel. Il est vérifié et lancé par le Low_Level_Bootloader lui-même vérifié et lancé par la SecureROM (tout part de ce composant précis mais je vais y revenir).
 
-​                           ![uartiboot](./pics/uartiboot.png)
+​                           ![uartiboot](./uartiboot.png)
 
  
 
