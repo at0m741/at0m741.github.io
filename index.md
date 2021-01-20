@@ -6,7 +6,7 @@ By at0m741
 
 
 
-iBoot est le second composants de la chaine de démarrage des appareils iOS d’Apple, il est le plus gros et gère bon nombres de fonctions dont le chargement du kernel. Il est vérifié et lancé par le Low_Level_Bootloader lui-même vérifié et lancé par la SecureROM (tout part de ce composant précis mais je vais y revenir).
+iBoot est le second composant de la chaine de démarrage des appareils iOS d’Apple, il est le plus gros et gère bon nombre de fonctions dont le chargement du kernel. Il est vérifié et lancé par le Low_Level_Bootloader lui-même vérifié et lancé par la SecureROM (tout pars de ce composant précis mais je vais y revenir).
 
 ​                           ![uartiboot](./uartiboot.png)
 
@@ -50,7 +50,7 @@ Un premier problème se pose : comment l’activer ?
 
 - un appareil demoted grâce à l’exploit Checkm8 de Axi0mX
 
-- Un cable lightning spécial (je vais m'expliquer)
+- Un câble lightning spécial (je vais m'expliquer)
 
  
 
@@ -66,27 +66,27 @@ Néanmoins le gros du travail passe par le port lightning…
 
 
 
-En effet sur les appareils Apple iOS, le SWD n’est accessible que via le port lightning, mais il ne suffit pas d’un simple programme pour y accéder, il faut un câble spécial ou la grosse différence se situe dans le chip du lightning (un 1-Wire propriétaire), qui fonctionne par un échange d’identifiant (SDQ) entre le Tristar (ou Hydra pour les plus récents) et le HiFive (connecteur lightning mâle qui contient le Chip SDQ SN2025/BQ2025).
+En effet sur les appareils Apple iOS, le SWD n’est accessible que via le port lightning, mais il ne suffit pas d’un simple programme pour y accéder, il faut un câble spécial ou la grosse différence se situe dans le chip du lightning (un 1-Wire propriétaire), qui fonctionne par un échange d’identifiants (SDQ) entre le Tristar (ou Hydra pour les plus récents) et le HiFive (connecteur lightning mâle qui contient le Chip SDQ SN2025/BQ2025).
 
  ![twitter_EatPnX2WAAE38L2](./twitter_EatPnX2WAAE38L2.jpg)
 
-En sniffant les wire du Lightning (du moins sur la puce HiFive) grâce à un analyseur logique (Cheap + Saleae pour ma part) on peut arriver a comprendre comment les cables communiquent via les differents messages échangés.
+En sniffant les wire du Lightning (du moins sur la puce HiFive) grâce à un analyseur logique (Cheap + Saleae pour ma part) on peut arriver à comprendre comment les câbles communiquent via les différents messages échangés.
 
 
 
-Par exemple pour un cable classique le message commence par la requête `0x74` qui demande au lightning d'activer le courant et voir comment les differents pins sont adressés la suite est `0x00 0x02`, ces deux addresses correspondent au données (data) et `0xFF` qui est le CRC8(cyclic redundancy check) sur le type de demande et sur l'ensemble des données.
+Par exemple pour un cable classique le message commence par la requête `0x74` qui demande au lightning d'activer le courant et voir comment les différents pins sont adressés la suite est `0x00 0x02`, ces deux addresses correspondent au données (data) et `0xFF` qui est le CRC8(cyclic redundancy check) sur le type de demande et sur l'ensemble des données.
 
 
 
-Pour ce qui est de la détéction des différents accessoires les pins important sont les ACC_iD (pin 1 et pin 4 sur la seconde face):
+Pour ce qui est de la détection des différents accessoires les pins importants sont les ACC_iD (pin 1 sur la première face et pin 4 sur la seconde face):
 
 
 
 ![lightning_connector_pinout](./lightning_connector_pinout.jpg) 
 
- Il est possible d'obtenir les iD grace a ACCCTL un outil ligne de commande interne a apple qui s'execute directement sur l'iDevice.
+ Il est possible d'obtenir les iD grâce à ACCCTL un outil lignes de commandes interne à apple qui s'exécute directement sur l'iDevice.
 
-En fonction des differents câbles on peut exectuter et récupérer les ID:
+En fonction des différents câbles on peut exéctuter et récupérer les ID:
 
 DCSD (uart):  `20 00 00 00 00 00`
 
@@ -94,7 +94,7 @@ Kong (SWD):  `20 02 00 00 00 00 / A0 00 00 00 00 00` (en fonction de ASTRIS cf. 
 
 
 
-En ayant accès à mon propre câble kong j'ai pu récupérer les reponses du Tristar grace a l'interface USB de celui-ci ce qui pourrait en theorie me permettre de cloner le câble en implémentant moi même le SDQ (quelques tricks et carte de developpement sont nécessaires tout de même)
+En ayant accès à mon propre câble kong j'ai pu récupérer les réponses du Tristar grâce à l'interface USB/UART de celui-ci ce qui pourrait, en theorie, me permettre de cloner le câble en implémentant moi même le SDQ (quelques tricks et carte de developpement sont nécessaires tout de même)
 
 <img src="./twitter_EGbM3ZeXkAUrWA1.jpg" alt="twitter_EGbM3ZeXkAUrWA1" style="zoom:25%;" />
 
@@ -102,7 +102,7 @@ En ayant accès à mon propre câble kong j'ai pu récupérer les reponses du Tr
 
 
 
-Pour résumer le SWD n'est possible que lorsque le CPFM est a 00 ou 01 et uniquement grâce à un câble spécial avec l'iD correspondant (et les option de SWD en plus mais je n'en dirais pas plus dans cet article j'y reviendrais dans le prochain)
+Pour résumer le SWD n'est possible que lorsque le CPFM (Chip Fuse Mode) est à 00 ou 01 et uniquement grâce à un câble spécial avec l'iD correspondant (et les options de SWD en plus mais je n'en dirais pas plus dans cet article j'y reviendrais dans un prochain)
 
 
 
@@ -154,37 +154,38 @@ Le debugging est permis une fois l’exploit exécuté et la démotion activée,
 
 
 
-ASTRIS permet d’obtenir une interface de debug du SoC via différents câbles Lightning qui permettent l’accès au port SWD (Kong, Kanzi, Chimp etc…). 
+ASTRIS permet d’obtenir une interface de debug du SoC via différents câbles Lightning (vus précédemment) qui permettent l’accès au port SWD (Kong, Kanzi, Chimp etc…). 
 
-L’image ci-dessus montre l’exécution du Framework ASTRIS en utilisant un câble Kong sur un iPhone 5c qui arrête l’exécution du SoC et envois d’une image d’iBoot patché pour annuler les vérifications de signature. Afin de lancer l’iBoot il faut faire en sorte qu’il démarre de la même manière que si il était exécuté par l’appareil. Une fois chargé en mémoire il suffit de modifier l’adresse du PC (Program Counter) à laquelle démarre le code de l’iBoot soit la fonction _iBootStart.
+L’image ci-dessus montre l’exécution du Framework ASTRIS en utilisant un câble Kong sur un iPhone 5c où j'ai arrêté l’exécution du SoC et envois d’une image d’iBoot patchée pour annuler les vérifications de signatures. 
+Afin de lancer l’iBoot il faut faire en sorte qu’il démarre de la même manière que si il était exécuté par l’appareil. Une fois chargé en mémoire il suffit de modifier l’adresse du PC (Program Counter) à laquelle démarre le code de l’iBoot soit la fonction _iBootStart.
 
 
 
-`ROM:5FF00BA4 _ibootStart               ; CODE XREF: ROM:5FF000FC�p`
+`ROM:5FF00BA4 _ibootStart               ; CODE XREF: ROM:5FF000FC�p
 
-`ROM:5FF00BA4                     ; DATA XREF: ROM:5FF000F4�o ...`
+ROM:5FF00BA4                     ; DATA XREF: ROM:5FF000F4�o ...
 
-`ROM:5FF00BA4         PUSH  {R7,LR}`
+ROM:5FF00BA4         PUSH  {R7,LR}
 
-`ROM:5FF00BA6         MOV   R7, SP`
+ROM:5FF00BA6         MOV   R7, SP
 
-`ROM:5FF00BA8         LDR   R0, =aIbootStart ; "\niBoot start\n"`
+ROM:5FF00BA8         LDR   R0, =aIbootStart ; "\niBoot start\n"
 
-`ROM:5FF00BAA         BL   loc_5FF233C4`
+ROM:5FF00BAA         BL   loc_5FF233C4
 
-`ROM:5FF00BAE         MOVS  R0, #0`
+ROM:5FF00BAE         MOVS  R0, #0
 
-`ROM:5FF00BB0         BL   loc_5FF16E54`
+ROM:5FF00BB0         BL   loc_5FF16E54
 
-`ROM:5FF00BB4         BL   loc_5FF1570C`
+ROM:5FF00BB4         BL   loc_5FF1570C
 
-`ROM:5FF00BB8         BL   loc_5FF143A8`
+ROM:5FF00BB8         BL   loc_5FF143A8
 
-`ROM:5FF00BBC         BL   unk_5FF15264`''
+ROM:5FF00BBC         BL   unk_5FF15264
 
-`ROM:5FF00BC0         LDR   R0, =aMain    ; "main"`
+ROM:5FF00BC0         LDR   R0, =aMain    ; "main"
 
-`..`
+..`
 
  Une fois iBoot exécuté le demote reste actif, le debugging reste donc possible. 
 
@@ -196,8 +197,9 @@ L’image ci-dessus montre l’exécution du Framework ASTRIS en utilisant un c�
 
 
 
-Le debugging bas niveau via SWD sur les appareil iOS était jusqu’à présent une tâche bien complexe et nécessitait des coûts assez important, mais avec l’arrivée de l’exploit checkm8 et la possibilité de demote des appareils, les perspectives de recherche de vulnérabilités bas niveau se sont considérablement ouvertes et laissent donc d’énormes possibilités et ne nécessitent plus de passer d’innombrables heures à désassembler et à chercher de nouveaux tricks afin de compromettre la sécurité de nos bijoux hors de prix.
+Le debugging bas niveau via SWD sur les appareils iOS était jusqu’à présent une tâche bien complexe et nécessitait des coûts assez important, mais avec l’arrivée de l’exploit checkm8 et la possibilité de demote des appareils, les perspectives de recherche de vulnérabilités bas niveau se sont considérablement ouvertes et laissent donc d’énormes possibilités et ne nécessitent plus de passer d’innombrables heures à désassembler (enfin si toujours mais différement) et à chercher de nouveaux tricks afin de compromettre la sécurité de nos bijoux hors de prix.
 
+Pour ma part le projet en ce moment porte sur le Lightning, j'essaye de recréer un câble UART (et par la suite SWD mais pas assez de skill pour le moment), j'ai passé la phase de recherche et de compréhension, let me hack now
 #  
 
 Bibliographie :
@@ -209,5 +211,5 @@ https://www.theiphonewiki.com/wiki/IBoot_(Bootloader)
 http://ramtin-amin.fr/#tristar                                                       
 
  https://blog.matteyeux.com     
-
+`
 Beaucoup de recherches personnelles et internes que je ne peux pas partager ici.     
