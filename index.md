@@ -161,31 +161,31 @@ Afin de lancer l’iBoot il faut faire en sorte qu’il démarre de la même man
 
 
 
-`ROM:5FF00BA4 _ibootStart               ; CODE XREF: ROM:5FF000FC�p
+`ROM:5FF00BA4 _ibootStart               ; CODE XREF: ROM:5FF000FC�p`
 
-ROM:5FF00BA4                     ; DATA XREF: ROM:5FF000F4�o ...
+`ROM:5FF00BA4                     ; DATA XREF: ROM:5FF000F4�o ...`
 
-ROM:5FF00BA4         PUSH  {R7,LR}
+`ROM:5FF00BA4         PUSH  {R7,LR}`
 
-ROM:5FF00BA6         MOV   R7, SP
+`ROM:5FF00BA6         MOV   R7, SP`
 
-ROM:5FF00BA8         LDR   R0, =aIbootStart ; "\niBoot start\n"
+`ROM:5FF00BA8         LDR   R0, =aIbootStart ; "\niBoot start\n"`
 
-ROM:5FF00BAA         BL   loc_5FF233C4
+`ROM:5FF00BAA         BL   loc_5FF233C4`
 
-ROM:5FF00BAE         MOVS  R0, #0
+`ROM:5FF00BAE         MOVS  R0, #0`
 
-ROM:5FF00BB0         BL   loc_5FF16E54
+`ROM:5FF00BB0         BL   loc_5FF16E54`
 
-ROM:5FF00BB4         BL   loc_5FF1570C
+`ROM:5FF00BB4         BL   loc_5FF1570C`
 
-ROM:5FF00BB8         BL   loc_5FF143A8
+`ROM:5FF00BB8         BL   loc_5FF143A8`
 
-ROM:5FF00BBC         BL   unk_5FF15264
+`ROM:5FF00BBC         BL   unk_5FF15264`
 
-ROM:5FF00BC0         LDR   R0, =aMain    ; "main"
+`ROM:5FF00BC0         LDR   R0, =aMain    ; "main"`
 
-..`
+
 
  Une fois iBoot exécuté le demote reste actif, le debugging reste donc possible. 
 
