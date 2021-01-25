@@ -26,7 +26,7 @@ Autre point qui est sans aucun doute le plus important à noter ; si l’un des 
 
 
 
-Il existe différentes méthodes de recherche de vulnérabilités sur iBoot dont la plus accessible est le reverse, néanmoins n’en déplaise aux puristes, la suivante reste néanmoins la plus performante bien que la plus couteuse : debug via Serial Wire Debugger.
+Il existe différentes méthodes de recherche de vulnérabilités sur iBoot dont la plus accessible est le reverse, mais n’en déplaise aux puristes, la suivante reste néanmoins la plus performante bien que la plus couteuse : debug via Serial Wire Debugger.
 
 ![SWD](./SWD.png)
 
