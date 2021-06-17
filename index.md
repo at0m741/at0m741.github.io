@@ -217,4 +217,4 @@ http://ramtin-amin.fr/#tristar
 Beaucoup de recherches personnelles et internes que je ne peux pas partager ici.     
 
 
-thanks to @nyan_satan and @manchenkoos for lightning research, @iH8sn0w, @axi0mX, @qwertyoruipz
+thanks to @nyan_satan and @manchenkoos for lightning research, @iH8sn0w, @axi0mX, @qwertyoruipz @matteyeux @key2fr
