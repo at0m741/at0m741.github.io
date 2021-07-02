@@ -22,8 +22,32 @@ Après quelques recherche dans le code j'ai commencé à cherché comment adapte
 
 
 
-![command](command.png)
+```c
+#if WITH_MENU
 
+static int do_reset(int argc, struct cmd_arg *args)
+{
+	platform_quiesce_display();
+
+#if WITH_HW_POWER
+	// Clear any pending PMU events
+	power_clr_events(1);
+#endif
+
+	platform_system_reset(false);
+
+	return 0;
+}
+
+static int do_halt(int argc, struct cmd_arg *args)
+{
+	halt();
+}
+
+MENU_COMMAND(reboot, do_reset, "reboot the device", NULL);
+MENU_COMMAND(reset, do_reset, NULL, NULL);
+MENU_COMMAND_DEVELOPMENT(halt, do_halt, "halt the system (good for JTAG)", NULL);
+```
 
 
 ce qui est assez simple en remplaçant
