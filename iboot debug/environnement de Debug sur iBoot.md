@@ -6,17 +6,17 @@
 
 
 
-iBoot comme vu dans l'article précédent, iBoot est la piece maitresse du démarrage de nos appareils apple, il mets en place et s'occupe de bon nombre d'I/O (dont l'UART qui va nous etre extremement utilie ici).
+iBoot comme vu dans l'article précédent, iBoot est la pièce maitresse du démarrage de nos appareils apple, il mets en place et s'occupe de bon nombre d'I/O (dont l'UART qui va nous être extremement utile ici).
 
-Dans l'article précédent je vous ai montré l'utilisation de probes SWD afin de pouvoir debugger des appareils CPFM00/01 ou exploités avec Checkm8, l'idée ici est d'apporter des modifications à la bootchain afin de le rendre utilie à une eventuelle recherche de vulnérabilité. Je vais donc vous expliquer comment j'ai pu obtenir des options supplémentaires dans le bootloader afin d'éviter d'avoir à trouver un de ces câbles magiques.
+Dans l'article précédent je vous ai montré l'utilisation de probes SWD afin de pouvoir debugger des appareils CPFM00/01 ou exploités avec Checkm8, l'idée ici est d'apporter des modifications à la bootchain afin de le rendre utile à une eventuelle recherche de vulnérabilités. Je vais donc vous expliquer comment j'ai pu obtenir des options supplémentaires dans le bootloader afin d'éviter d'avoir à acheter un de ces câbles magiques.
 
 
 
 ## premières explorations dans le code source
 
-En 2018 un leaker a publié sur Github le code source (incomplet) d'iBoot iOS 9x, qui après certaines modifications à permis une compilation d'image DEVELOPMENT/DEBUG/RELEASE qui ont pu être booté grâce a kloader et checkm8.
+En 2018 un leaker a publié sur Github le code source (incomplet) d'iBoot iOS 9x (cf les différents articles sur internet), qui après certaines modifications dans le `Makefile` et à l'ajout d'units dans `la device_map.db` ont permit une compilation d'images DEVELOPMENT/DEBUG/RELEASE qui ont pu être booté grâce à kloader et checkm8.
 
-Après quelques recherche dans le code j'ai cherché à adapter les commandes iBoot DEBUG a une version DEVELOPMENT ou RELEASE au vu de la complexité de faire démarrer des images DEBUG.
+Après quelques recherche dans le code j'ai commencé à cherché comment adapter les commandes iBoot DEBUG a une version DEVELOPMENT ou RELEASE au vu de la complexité de faire démarrer des images DEBUG.
 
 
 
