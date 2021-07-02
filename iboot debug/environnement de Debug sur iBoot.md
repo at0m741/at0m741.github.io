@@ -162,9 +162,10 @@ MENU_COMMAND(regs, do_regs, "print registers addresses", NULL);
 
 j'ai donc effectué la même opperation pour tout les registres afin de pouvoir obtenir l'adresse de chacuns des registres grace à `__asm__(`) et de l'afficher via `Printf()`.
 
-J'ai donc utilisé `MENU_COMMAND()`afin d'intégrer la commande aux trois types d'images. (à noter que sur un iBoot RELEASE un cable UART est indispensable et des patch supplémentaires doivent être appliqué).
-Dans les versions non compilées il est possible d'intégrer ces differentes fonctions grâce a un payload fait avec iBEX.
+J'ai donc utilisé `MENU_COMMAND()`afin d'intégrer la commande aux trois types d'images. (A noter que sur un iBoot RELEASE un cable UART est indispensable et des patch supplémentaires doivent être appliqué).
+Dans les versions non compilées, il est possible d'intégrer ces differentes fonctions grâce à un payload fait avec iBEX de Xerub (je m'expliquerai un peu plus loin).
 
+Comme vous pouvez le voir lorsque je rentre la commande regs la console iRecovery me retourne la valeur de chacuns des registres (c'est également affiché dans le UART log).
 
 ![regdump](regdump.png)
 
