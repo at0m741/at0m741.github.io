@@ -7,7 +7,11 @@ DISCLAILMER!!! à noter que ce post les informations traitent en partie de logic
 
 
 
+
+
 ![iboot](iboot.png)
+
+
 
 
 
@@ -15,6 +19,8 @@ DISCLAILMER!!! à noter que ce post les informations traitent en partie de logic
 iBoot comme vu dans l'article précédent, iBoot est la pièce maitresse du démarrage de nos appareils apple, il mets en place et s'occupe de bon nombre d'I/O (dont l'UART qui va nous être extremement utile ici).
 
 Dans l'article précédent je vous ai montré l'utilisation de probes SWD afin de pouvoir debugger des appareils CPFM00/01 ou exploités avec Checkm8, l'idée ici est d'apporter des modifications à la bootchain afin de le rendre utile à une eventuelle recherche de vulnérabilités. Je vais donc vous expliquer comment j'ai pu obtenir des options supplémentaires dans le bootloader afin d'éviter d'avoir à acheter un de ces câbles magiques.
+
+
 
 
 
@@ -74,7 +80,11 @@ Notez que les versions iBoot DEBUG permettent d'écrire et de lire en memoire, n
 
 
 
+
+
 ![debugtag](debugtag.png)
+
+
 
 
 
@@ -131,6 +141,7 @@ la structure est celle d'une commande basique d'iBoot, si la commande est entré
 
 
 
+
 ### Modifications
 
 Nativement le seul moyen d'obtenir l'état des registres CPU sur iBoot est de générer un paniclog en ajoutant un bp ou par tout autre moyen que j'expliquerai plus tard
@@ -166,7 +177,7 @@ Dans les versions non compilées il est possible d'intégrer ces differentes fon
 
 
 
-![regs](regs.png)
 
 
+![regsdump](/Users/louis/Desktop/iboot debug/regsdump.png)
 
