@@ -91,7 +91,7 @@ do_memdump(int argc, struct cmd_arg *args)
 	} else {
 		width = 8;
 	}
-```c
+```
 
 
 ![md](md.png)
