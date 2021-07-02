@@ -2,6 +2,8 @@
 
 # environnement de Debug sur iBoot
 
+DISCLAILMER!!! à noter que ce post les informations traitent en partie de logiciels et matériels internes à Apple, je ne serai pas en mesure de vous livrer quoi que ce soit. Ce post est à caractère éducatif et n'est en aucun cas un tutoriel. Notez également que jouer avec les parties bas niveaux de vos appareils peuvent causer des dommages irréversible, vous lisez ceci en connaissance de cause je ne serai résponsable pas résponsable.
+
 ![iboot](iboot.png)
 
 
@@ -94,7 +96,8 @@ MENU_COMMAND(regs, do_regs, "print registers addresses", NULL);
 
 j'ai donc effectué la même opperation pour tout les registres afin de pouvoir obtenir l'adresse de chacuns des registres grace à `__asm__(`) et de l'afficher via `Printf()`.
 
-J'ai donc utilisé `MENU_COMMAND()`afin d'intégrer la commande aux trois types d'images. (à noter que sur un iBoot RELEASE un cable UART est indispensable sans patch supplémentaires).
+J'ai donc utilisé `MENU_COMMAND()`afin d'intégrer la commande aux trois types d'images. (à noter que sur un iBoot RELEASE un cable UART est indispensable et des patch supplémentaires doivent être appliqué).
+Dans les versions non compilées il est possible d'intégrer ces differentes fonctions grâce a un payload fait avec iBEX.
 
 
 
