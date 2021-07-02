@@ -2,7 +2,7 @@
 
 # environnement de Debug sur iBoot
 
-![iboot](/Users/louis/Desktop/iboot.png)
+![iboot](iboot.png)
 
 
 
@@ -20,7 +20,7 @@ Après quelques recherche dans le code j'ai cherché à adapter les commandes iB
 
 
 
-![command](/Users/louis/Desktop/command.png)
+![command](command.png)
 
 
 
