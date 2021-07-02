@@ -94,9 +94,6 @@ do_memdump(int argc, struct cmd_arg *args)
 ```
 
 
-![md](md.png)
-
-
 
 
 
