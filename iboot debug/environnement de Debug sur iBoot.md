@@ -90,20 +90,10 @@ Notez que les versions iBoot DEBUG permettent d'écrire et de lire en memoire, n
 
 
 
-Les versions de debug intègrent des commandes interessantes et ont des privilèges plus élevés par rapport aux versions RELEASE/DEVELOPMENT. 
-Les commandes md/mw permettent de lire et d'écrire en memoire ce qui peut s'averer relativement pratique, en revanche elle ne fonctionnent nativement que sur ces verisons là, pour ce qui est des versions RELEASE/DEVELOPMENT il est nécessaire de modifier le code source.
-
-
-
-
-
-![idamd](idamd.png)
-
-
-
-
-
-la commande `md` `<addr>` permet d'afficher un dump de memoire a une addresse donnée (ne fonctionne nativement que sur les versions DEBUG d'iBoot)
+Les versions de debug intègrent des commandes intéressantes et ont des privilèges plus élevés par rapport aux versions RELEASE/DEVELOPMENT. 
+Les commandes md/mw par exemple permettent de lire et d'écrire en mémoire ce qui peut s'avérer relativement pratique.
+En revanche elle ne fonctionnent nativement que sur les images DEBUG. Pour ce qui est des versions RELEASE/DEVELOPMENT, il est nécessaire de modifier le code source d'iBoot.
+La commande `md` `<addr>` permet donc d'afficher un dump de memoire a une addresse donnée:
 
 ```c
 static int
@@ -136,7 +126,7 @@ do_memdump(int argc, struct cmd_arg *args)
 		width = 8;
 	}
 ```
-la structure est celle d'une commande basique d'iBoot, si la commande est entrée elle print un dump 32bits mais ont peut spécifier `-64` derrière pour les versions aarch64 par exemple.
+la structure est celle d'une commande basique d'iBoot, si la commande est entrée elle print un dump 32bits d'une addresse de base mais ont peut spécifier `-64` derrière pour les versions aarch64 par exemple et 
 
 
 
