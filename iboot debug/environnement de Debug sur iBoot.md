@@ -58,9 +58,7 @@ MENU_COMMAND_DEBUG()
 
 par
 
-```c
-MENU_COMMAND() ou MENU_COMMAND_DEVELOPMENT()
-```
+`MENU_COMMAND()` ou `MENU_COMMAND_DEVELOPMENT()
 
 néanmoins cette methode est assez limité au vu de l'inutilité de la plupart des commandes, j'ai donc pensé par frustration à introduire les miennes.
 
