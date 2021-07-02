@@ -179,5 +179,5 @@ Dans les versions non compilées il est possible d'intégrer ces differentes fon
 
 
 
-![regsdump](regsdump.png)
+
 
