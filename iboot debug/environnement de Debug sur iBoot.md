@@ -73,7 +73,8 @@ par
 
 `MENU_COMMAND()` ou `MENU_COMMAND_DEVELOPMENT()`
 
-Néanmoins il est important de savoir que cette methode est assez limité au vu de l'inutilité de la plupart des commandes hors des versions de DEBUG dont je n'expliquerai pas la méthode pour les faires démarrer, j'ai donc pensé, par frustration, à introduire les miennes.
+Néanmoins il est important de savoir que cette méthode est assez limité au vu de l'inutilité de la plupart des commandes qui hors des versions de DEBUG ne fonctionnenent pas.
+notez que je n'expliquerai pas la méthode pour faire démarrer ces versions particulières, j'ai donc pensé, par frustration, à introduire les miennes.
 Notez que les versions iBoot DEBUG permettent d'écrire et de lire en memoire, néanmoins afin d'être démarrés elles nécessitent quelques modifications dans le code source comme je viens de l'expliquer.
 
 
