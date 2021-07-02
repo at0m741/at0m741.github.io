@@ -166,7 +166,7 @@ J'ai donc utilisé `MENU_COMMAND()`afin d'intégrer la commande aux trois types 
 Dans les versions non compilées il est possible d'intégrer ces differentes fonctions grâce a un payload fait avec iBEX.
 
 
-
+![regdump](regdump.png)
 
 
 
