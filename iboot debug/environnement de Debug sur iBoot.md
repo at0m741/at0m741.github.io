@@ -59,6 +59,40 @@ Les commandes md/mw permettent de lire et d'écrire en memoire ce qui peut s'ave
 ![idamd](idamd.png)
 
 
+la commande `md` `<addr>` permet d'afficher un dump de memoire a une addresse donnée (ne fonctionne nativement que sur les versions DEBUG d'iBoot)
+
+```c
+static int
+do_memdump(int argc, struct cmd_arg *args)
+{
+	uintptr_t address;
+	size_t count;
+	int width;
+	size_t i;
+	int index_mod = 16;
+
+	/* default dump values */
+	static uintptr_t last_address = DEFAULT_LOAD_ADDRESS;
+	static size_t last_count = 0x100;
+
+	if (!strcmp(args[0].str, "md")) {
+		width = 32;
+		if (argc > 1) {
+			if (!strcmp(args[1].str, "-help")) {
+				memdump_usage();
+				return 0;
+			} else if (!strcmp(args[1].str, "-64")) {
+				width = 64;
+				index_mod = 32;
+			}
+		}
+	} else if (!strcmp(args[0].str, "mdh")) {
+		width = 16;
+	} else {
+		width = 8;
+	}
+```c
+
 
 ![md](md.png)
 
