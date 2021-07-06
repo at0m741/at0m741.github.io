@@ -16,9 +16,9 @@ DISCLAILMER!!! à noter que ce post les informations traitent en partie de logic
 
 
 
-iBoot comme vu dans l'article précédent, iBoot est la pièce maitresse du démarrage de nos appareils apple, il mets en place et s'occupe de bon nombre d'I/O (dont l'UART qui va nous être extremement utile ici).
+iBoot comme vu dans l'article précédent, est la pièce maitresse du démarrage de nos appareils apple, tout du moins la plus importante, il met en place et s'occupe de bon nombre d'I/O comme l'USB ou l'UART (qui vont nous être extremement utiles ici). Notez que depuis quelques années il n'y à plus qu'un seul Bootloader dans nos iPhones.
 
-Dans l'article précédent je vous ai montré l'utilisation de probes SWD afin de pouvoir debugger des appareils CPFM00/01 ou exploités avec Checkm8, l'idée ici est d'apporter des modifications à la bootchain afin de le rendre utile à une eventuelle recherche de vulnérabilités. Je vais donc vous expliquer comment j'ai pu obtenir des options supplémentaires dans le bootloader afin d'éviter d'avoir à acheter un de ces câbles magiques.
+Précédement, je vous avait montré l'utilisation de probes SWD afin de pouvoir debugger le SoC et l'iBoot des appareils CPFM00/01 ou exploités avec Checkm8, l'idée ici est d'apporter des modifications à iBoot afin de le rendre plus utile à une éventuelle recherche de vulnérabilités ou une meilleure appréhension de celui-ci. Je vais donc vous expliquer comment j'ai pu obtenir des options supplémentaires dans le bootloader en y ajoutant mes propres fonctions afin d'éviter d'avoir à acheter un de ces câbles magiques.
 
 
 
@@ -28,9 +28,11 @@ Dans l'article précédent je vous ai montré l'utilisation de probes SWD afin d
 
 ## premières explorations dans le code source
 
-En 2018 un leaker a publié sur Github le code source (incomplet) d'iBoot iOS 9x (cf les différents articles sur internet), qui après certaines modifications dans le `Makefile` et à l'ajout d'units dans `la device_map.db` ont permit une compilation d'images DEVELOPMENT/DEBUG/RELEASE qui ont pu être booté grâce à kloader et checkm8.
+En 2018 un leaker a publié sur Github le code source (incomplet) d'iBoot iOS 9x (cf les différents articles sur internet), qui après certaines modifications dans le `Makefile` et à l'ajout d'units dans `la device_map.db` et autres petits tricks ont permit une compilation d'images DEVELOPMENT/DEBUG/RELEASE qui ont pu être booté grâce à kloader et checkm8.
 
-Après quelques recherche dans le code j'ai commencé à cherché comment adapter les commandes iBoot DEBUG a une version DEVELOPMENT ou RELEASE au vu de la complexité de faire démarrer des images DEBUG.
+Après quelques recherches dans le code j'ai commencé à chercher comment adapter les commandes iBoot DEBUG à une version DEVELOPMENT ou RELEASE au vu de la complexité de faire démarrer des images DEBUG.
+
+l'idée est dans cette portion de code:
 
 
 
@@ -63,7 +65,7 @@ MENU_COMMAND_DEVELOPMENT(halt, do_halt, "halt the system (good for JTAG)", NULL)
 ```
 
 
-ce qui est assez simple en remplaçant
+Ce qui est assez simple en remplaçant
 
 ```c
 MENU_COMMAND_DEBUG()
@@ -73,8 +75,9 @@ par
 
 `MENU_COMMAND()` ou `MENU_COMMAND_DEVELOPMENT()`
 
-Néanmoins il est important de savoir que cette méthode est assez limité au vu de l'inutilité de la plupart des commandes qui hors des versions de DEBUG, ne fonctionnenent pas.
-Notez que les versions iBoot DEBUG permettent d'écrire et de lire en memoire. Néanmoins afin d'être démarrées elles nécessitent quelques modifications dans le code source comme je viens de l'expliquer. Je n'expliquerai pas la méthode pour faire démarrer ces versions particulières.
+
+Néanmoins il est important de savoir que cette méthode est assez limité au vu de l'inutilité de la plupart des commandes qui hors des versions de DEBUG (ou appareils proto), ne fonctionnenent tout simplement pas (certaines sont désactivées dans le code).
+Notez que les versions iBoot DEBUG permettent d'écrire et de lire en memoire. Néanmoins afin d'être démarrées elles nécessitent quelques modifications que je n'expliquerai pas ici.
 
 
 
@@ -92,7 +95,7 @@ Notez que les versions iBoot DEBUG permettent d'écrire et de lire en memoire. N
 
 Les versions de debug intègrent des commandes intéressantes et ont des privilèges plus élevés par rapport aux versions RELEASE/DEVELOPMENT. 
 Les commandes md/mw par exemple permettent de lire et d'écrire en mémoire ce qui peut s'avérer relativement pratique.
-En revanche elle ne fonctionnent nativement que sur les images DEBUG. Pour ce qui est des versions RELEASE/DEVELOPMENT, il est nécessaire de modifier le code source d'iBoot.
+En revanche elle ne fonctionnent nativement que sur les images DEBUG. Pour ce qui est des versions RELEASE/DEVELOPMENT, il est nécessaire d'apporter des patchs supplémentaires.
 La commande `md` `<addr>` permet donc d'afficher un dump de memoire a une addresse donnée:
 
 ```c
@@ -126,13 +129,15 @@ do_memdump(int argc, struct cmd_arg *args)
 		width = 8;
 	}
 ```
-la structure est celle d'une commande basique d'iBoot, si la commande est entrée elle print un dump 32bits d'une addresse de base mais ont peut spécifier `-64` derrière pour les versions aarch64 par exemple et 
+la structure est celle d'une commande basique d'iBoot, si la commande est entrée elle print un dump 32bits d'une addresse de base, mais ont peut spécifier `-64` derrière.
+La commande `mw` permet à l'inverse d'écrire en memoire à peut près tout ce que vous voulez.
 
 
 
 
 
 ### Modifications
+
 
 Nativement le seul moyen d'obtenir l'état des registres CPU sur iBoot est de générer un paniclog en ajoutant un bp ou par tout autre moyen que j'expliquerai plus tard
 
