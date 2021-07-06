@@ -136,16 +136,16 @@ La commande `mw` permet à l'inverse d'écrire en memoire à peut près tout ce 
 
 
 
-### Modifications
+### Modifications personnelles
 
-
-Nativement le seul moyen d'obtenir l'état des registres CPU sur iBoot est de générer un paniclog en ajoutant un bp ou par tout autre moyen que j'expliquerai plus tard
+Bien que les différentes commandes intégrées soit bien pratiques je dois bien avouer que la frustration était tout de même de mise. Grâve aux differentes probes SWD et à astris (ou openOCD) il est possible de dumper l'état des registres ARM en arrêtant le processus en cours, chose difficile sans ces precieux outils.
+Nativement le seul moyen d'obtenir l'état des registres CPU sur iBoot est de générer un paniclog en ajoutant un breakpoint à une adresse donnée (pas compliqué en ajoutant une simple fonction de crash (BKPT).
 
 ![panic](panic.png)
 
 
 
-le soucis etant que cela force un reboot de l'appareil donc utile mais pas dans l'idée. J'ai donc cherché à pouvoir afficher l'etat des registres sans avoir à reboot et ce par entré d'une commande.
+le soucis principal étant que cela force un reboot de l'appareil donc utile en certaines circonstances mais pas dans l'idée. J'ai donc cherché à pouvoir afficher l'etat des registres sans avoir à reboot et ce par entré d'une commande.
 
 
 
@@ -165,14 +165,29 @@ MENU_COMMAND(regs, do_regs, "print registers addresses", NULL);
 
 
 
-j'ai donc effectué la même opperation pour tout les registres afin de pouvoir obtenir l'adresse de chacuns des registres grace à `__asm__(`) et de l'afficher via `Printf()`.
+j'ai donc effectué la même opperation pour tout les registres afin de pouvoir obtenir l'adresse de chacuns grace à `__asm__(`) qui appel l'assembleur inline en C et d'afficher via `Printf()` les differentes valeurs.
 
-J'ai donc utilisé `MENU_COMMAND()`afin d'intégrer la commande aux trois types d'images. (A noter que sur un iBoot RELEASE un cable UART est indispensable et des patch supplémentaires doivent être appliqué).
-Dans les versions non compilées, il est possible d'intégrer ces differentes fonctions grâce à un payload fait avec iBEX de Xerub (je m'expliquerai un peu plus loin).
+J'ai donc utilisé `MENU_COMMAND()`afin d'intégrer la commande aux trois types d'images. (à noter que sur un iBoot RELEASE un cable UART est indispensable et que des patchs supplémentaires doivent être appliqués).
+Dans les versions non compilées, il est possible d'intégrer ces differentes fonctions grâce à un payload fait avec iBEX de Xerub (je m'expliquerai un peu plus tards).
 
 Comme vous pouvez le voir lorsque je rentre la commande regs la console iRecovery me retourne la valeur de chacuns des registres (c'est également affiché dans le UART log).
 
 ![regdump](regdump.png)
+
+
+(quelques erreurs sont tout de même à relever).
+
+
+
+### Conclusions
+
+
+iBoot est à mon sens une partie extremement intéressantes d'iOS, néanmpoins de par sa position peu accessible, le debug peut s'avérer difficile et doit majoritairement passer par un long travail de reverse, étant quelqu'un d'assez flemmard j'ai donc vite pensé à faciliter un peu les choses. Intégrer de nouvelles portions de code à iBoot permet dans un sens d'aider à son exploration mais surtout à une meilleure compréhension de son fonctionnement interne. L'article ici présent montre à quel point il peut être intéressant de parfois mettre les mains dans le code et de modifier quelque chose afin d'en comprendre certains aspects.
+Ce writup évoluera en fonctions des avancées que je ferai au cours des prochaines semaines(le payload iBEX par exemple qui facilitera grandement les choses mais que je dois finir car il ne fonctionne pas encore complètement mais que je publierai par la suite). 
+
+
+### Remerciement
+@matteyeux, @xerub, @nyan_satan, exploit3dguy, @iH8sn0w (qui m'avait donné l'idée de l'ajout d'une fonction de debug il y à quelques années), @nasm
 
 
 
