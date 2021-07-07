@@ -2,7 +2,7 @@
 
 # environnement de Debug sur iBoot
 
-DISCLAILMER!!! à noter que dans ce post les informations traitent en partie de logiciels et matériels internes à Apple, je ne serai pas en mesure de vous livrer quoi que ce soit. Ce post est à caractère éducatif et n'est en aucun cas un tutoriel. Notez également que jouer avec les parties bas niveaux de vos appareils peuvent causer des dommages irréversible, vous lisez ceci en connaissance de cause je ne serai pas responsable.
+DISCLAILMER!!! à noter que dans ce post les informations traitent en partie de logiciels et matériels internes à Apple, je ne serai pas en mesure de vous livrer quoi que ce soit. Ce post est à caractère éducatif et n'est en aucun cas un tutoriel. Notez également que jouer avec les parties bas niveaux de vos appareils peut causer des dommages irréversible, vous lisez ceci en connaissance de cause, je ne serai pas responsable.
 
 
 
