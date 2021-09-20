@@ -1,2 +1,5 @@
 theme: jekyll-theme-slate
 
+layout: page
+title: "Environnement de Debug iBoot"
+permalink: /iboot debug/
