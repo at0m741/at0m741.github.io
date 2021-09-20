@@ -1,1 +1,4 @@
-theme: jekyll-theme-midnight
+theme:      tale
+
+permalink:  /:year-:month-:day/:title
+paginate:   5
