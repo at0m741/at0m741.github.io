@@ -166,7 +166,11 @@ return 0;
 MENU_COMMAND("mw", do_mw, "memory write 32bit")`
 ```
 
-La commande est implémenté de manière différente que dans le code d'Apple, mais l'usage est le même. J'ai également implémenté une commanque qui permet de modifier les registres ARM (pc = 0x41414141 ou n'importe quel registre afin de générer des panic dumps)
+La commande est implémenté de manière différente que dans le code d'Apple, mais l'usage est le même. J'ai également implémenté une commanque qui permet de modifier les registres ARM (pc = 0xfeedface applicable sur n'importe quel registre afin de générer des panic dumps et/ou de relancer des portions du bootloader plus tard).
+
+![payload](feedface.png)
+
+Comme vous pouvez le voir ci dessus j'ai modifié les adresses des registres pour 0xfeedface ce qui à généré un Panic Dump.
 
 Sur la notion de payload sur arm32, il n'y a en soit pas vraiment de limite vous pouvez y intégrer à peut près tout ce qui peut vous être utile. J'ai bien personnalisé le miens, je le publierai sur GitHub quand il sera complètement prêt.
 
