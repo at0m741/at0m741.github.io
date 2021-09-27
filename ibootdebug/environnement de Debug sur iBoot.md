@@ -2,70 +2,29 @@
 
 # environnement de Debug sur iBoot
 
-DISCLAILMER!!! à noter que dans ce post les informations traitent en partie de logiciels et matériels internes à Apple, je ne serai pas en mesure de vous livrer quoi que ce soit. Ce post est à caractère éducatif et n'est en aucun cas un tutoriel. Notez également que jouer avec les parties bas niveaux de vos appareils peut causer des dommages irréversible, vous lisez ceci en connaissance de cause, je ne serai pas responsable.
-
-
-
-
-
-
 ![iboot](iboot.png)
 
 
 
+iBoot comme vu dans l'article précédent, iBoot est la piece maitresse du démarrage de nos appareils apple, il mets en place et s'occupe de bon nombre d'I/O (dont l'UART qui va nous etre extremement utilie ici).
 
-
-
-iBoot comme vu dans l'article précédent, est la pièce maitresse du démarrage de nos appareils apple, tout du moins la plus importante, il met en place et s'occupe de bon nombre d'I/O comme l'USB ou l'UART (qui vont nous être extremement utiles ici). Notez que depuis quelques années il n'y à plus qu'un seul Bootloader dans nos iPhones.
-
-Précédement, je vous avais montré l'utilisation de probes SWD afin de pouvoir debugger le SoC et l'iBoot des appareils CPFM00/01 ou exploités avec Checkm8, l'idée ici est d'apporter des modifications à iBoot afin de le rendre plus utile à une éventuelle recherche de vulnérabilité ou une meilleure appréhension de celui-ci. Je vais donc vous expliquer comment j'ai pu obtenir des options supplémentaires dans le bootloader en y ajoutant mes propres fonctions afin d'éviter d'avoir à acheter un de ces câbles magiques.
-
-
-
-
+Dans l'article précédent je vous ai montré l'utilisation de probes SWD afin de pouvoir debugger des appareils CPFM00/01 ou exploités avec Checkm8, l'idée ici est d'apporter des modifications à la bootchain afin de la rendre plus utilie à une eventuelle recherche de vulnérabilités. Je vais donc vous expliquer comment j'ai pu obtenir des options supplémentaires dans le bootloader afin d'éviter d'avoir à trouver un de ces câbles magiques.
 
 
 
 ## premières explorations dans le code source
 
-En 2018 un leaker a publié sur Github le code source (incomplet) d'iBoot iOS 9x (cf les différents articles sur internet), qui après certaines modifications dans le `Makefile` et à l'ajout d'units dans `la device_map.db` et autres petits tricks ont permis une compilation d'images DEVELOPMENT/DEBUG/RELEASE qui ont pu être bootées grâce à kloader et checkm8.
+En 2018 un leaker a publié sur Github le code source (incomplet) d'iBoot iOS 9x, qui après certaines modifications à permis une compilation d'image DEVELOPMENT/DEBUG/RELEASE qui ont pu être booté grâce a kloader et checkm8.
 
-Après quelques recherches dans le code j'ai commencé par essayer d'adapter les commandes iBoot DEBUG à une version DEVELOPMENT ou RELEASE au vu de la complexité de faire démarrer des images DEBUG.
-
-l'idée est dans cette portion de code:
+Après quelques recherche dans le code j'ai cherché à adapter les commandes iBoot DEBUG a une version DEVELOPMENT ou RELEASE au vu de la complexité de faire démarrer des images DEBUG.
 
 
 
-
-```c
-#if WITH_MENU
-
-static int do_reset(int argc, struct cmd_arg *args)
-{
-	platform_quiesce_display();
-
-#if WITH_HW_POWER
-	// Clear any pending PMU events
-	power_clr_events(1);
-#endif
-
-	platform_system_reset(false);
-
-	return 0;
-}
-
-static int do_halt(int argc, struct cmd_arg *args)
-{
-	halt();
-}
-
-MENU_COMMAND(reboot, do_reset, "reboot the device", NULL);
-MENU_COMMAND(reset, do_reset, NULL, NULL);
-MENU_COMMAND_DEVELOPMENT(halt, do_halt, "halt the system (good for JTAG)", NULL);
-```
+![command](command.png)
 
 
-Ce qui est assez simple en remplaçant
+
+ce qui est assez simple en remplaçant
 
 ```c
 MENU_COMMAND_DEBUG()
@@ -73,13 +32,13 @@ MENU_COMMAND_DEBUG()
 
 par
 
-`MENU_COMMAND()` ou `MENU_COMMAND_DEVELOPMENT()`
+```c
+MENU_COMMAND() ou MENU_COMMAND_DEVELOPMENT
+```
 
+néanmoins cette methode est assez limité au vu de l'inutilité de la plupart des commandes, j'ai donc pensé par frustration à introduire les miennes.
 
-Néanmoins il est important de savoir que cette méthode est assez limité au vu de l'inutilité de la plupart des commandes qui hors des versions de DEBUG (ou appareils proto), ne fonctionnenent tout simplement pas (certaines sont désactivées dans le code).
-Notez que les builds iBoot DEBUG permettent d'écrire et de lire en mémoire. Néanmoins afin d'être démarrées elles nécessitent quelques modifications que je n'expliquerai pas ici.
-
-
+Il est tout de même important de noter que les versions iBoot DEBUG, permettent d'écrire et de lire en memoire, néanmoins afin d'être démarrés elles nécessitent quelques modifications dans le code source.
 
 
 
@@ -91,61 +50,31 @@ Notez que les builds iBoot DEBUG permettent d'écrire et de lire en mémoire. N�
 
 
 
+Comme expliqué, dans les versions de debug sont assez étranges à faire fonctionner néanmoins elles integrent des commandes interessantes et ont des privilèges plus élevés par rapport aux versions RELEASE/DEVELOPMENT. 
 
 
-Les versions de debug intègrent des commandes intéressantes et ont des privilèges plus élevés par rapport aux versions RELEASE/DEVELOPMENT. 
-Les commandes md/mw par exemple permettent de lire et d'écrire en mémoire ce qui peut s'avérer relativement pratique.
-En revanche elles ne fonctionnent nativement que sur les images DEBUG. Pour ce qui est des versions RELEASE/DEVELOPMENT, il est nécessaire d'apporter des patchs supplémentaires.
-La commande `md` `<addr>` permet donc d'afficher un dump de memoire à une addresse donnée:
 
-```c
-static int
-do_memdump(int argc, struct cmd_arg *args)
-{
-	uintptr_t address;
-	size_t count;
-	int width;
-	size_t i;
-	int index_mod = 16;
+Les commandes md/mw permettent de lire et d'écrire en memoire ce qui peut s'averer relativement pratique, en revanche elle ne fonctionnent nativement que sur ces verisons là, pour ce qui est des versions RELEASE/DEVELOPMENT il est nécessaire de modifier le code source.
 
-	/* default dump values */
-	static uintptr_t last_address = DEFAULT_LOAD_ADDRESS;
-	static size_t last_count = 0x100;
 
-	if (!strcmp(args[0].str, "md")) {
-		width = 32;
-		if (argc > 1) {
-			if (!strcmp(args[1].str, "-help")) {
-				memdump_usage();
-				return 0;
-			} else if (!strcmp(args[1].str, "-64")) {
-				width = 64;
-				index_mod = 32;
-			}
-		}
-	} else if (!strcmp(args[0].str, "mdh")) {
-		width = 16;
-	} else {
-		width = 8;
-	}
-```
-la structure est celle d'une commande basique d'iBoot, si la commande est entrée, elle print un dump 32bits d'une adresse de base, mais ont peut spécifier `-64` derrière et bien sûr une adresse voulue.
-La commande `mw` permet à l'inverse d'écrire en mémoire à peut près tout ce que vous voulez.
+
+![idamd](idamd.png)
 
 
 
 
 
-### Modifications personnelles
+### Modifications
 
-Bien que les différentes commandes intégrées soit bien pratiques je dois bien avouer que la frustration était tout de même de mise. Grâce aux différentes probes SWD et à astris (ou openOCD) il est possible de dumper l'état des registres ARM en arrêtant le processus en cours, chose difficile sans ces précieux outils.
-Nativement le seul moyen d'obtenir l'état des registres CPU sur iBoot est de générer un paniclog en ajoutant un breakpoint à une adresse donnée (pas compliqué en ajoutant une simple fonction de crash (BKPT).
+Nativement le seul moyen d'obtenir l'état des registres CPU sur iBoot est de générer un paniclog en ajoutant un bp ou par tout autre moyen que j'expliquerai plus tard
+
+
 
 ![panic](panic.png)
 
 
 
-le souci principal étant que cela force un reboot de l'appareil donc utile en certaines circonstances mais pas dans l'idée. J'ai donc cherché à afficher l'état des registres sans avoir à reboot et ce en entrant une commande.
+le soucis etant que cela force un reboot de l'appareil donc utile mais pas dans l'idée. J'ai donc cherché à pouvoir afficher l'etat des registres sans avoir à reboot et ce par entré d'une commande.
 
 
 
@@ -165,27 +94,106 @@ MENU_COMMAND(regs, do_regs, "print registers addresses", NULL);
 
 
 
-j'ai donc effectué la même opération pour tous les registres afin de pouvoir obtenir l'adresse de chacun grâce à `__asm__(`) qui appel l'assembleur inline en C et d'afficher via `Printf()` les différentes valeurs.
+j'ai donc effectué la même opperation pour tout les registres afin de pouvoir obtenir l'adresse de chacuns des registres grace à `__asm__(`) et de l'afficher via `Printf()`.
 
-J'ai donc utilisé `MENU_COMMAND()`afin d'intégrer la commande aux trois types d'images. (à noter que sur un iBoot RELEASE un câble UART est indispensable et que des patchs supplémentaires doivent être appliqués).
-Dans les versions non compilées, il est possible d'intégrer ces différentes fonctions grâce à un payload fait avec la base iBEX de Xerub (je m'expliquerai un peu plus tards).
-
-Comme vous pouvez le voir lorsque je rentre la commande regs, la console iRecovery me retourne la valeur de chacuns des registres (c'est également affiché dans le UART log).
-
-![regdump](regdump.png)
+J'ai donc utilisé `MENU_COMMAND()`afin d'intégrer la commande aux trois types d'images. (à noter que sur un iBoot RELEASE un cable UART est indispensable sans patch supplémentaires).
 
 
 
-
-### Conclusions
-
-
-iBoot est à mon sens une partie extrêmement intéressantes d'iOS, néanmoins de par sa position peu accessible, le debug peut s'avérer difficile et doit majoritairement passer par un long travail de reverse, étant quelqu'un d'assez flemmard j'ai donc vite pensé à faciliter un peu les choses. Intégrer de nouvelles portions de code à iBoot permet dans un sens d'aider à son exploration mais surtout à une meilleure compréhension de son fonctionnement interne. L'article ici présent montre à quel point il peut être intéressant de parfois mettre les mains dans le code et de modifier quelque chose afin d'en comprendre certains aspects.
-Ce writup évoluera en fonction des avancées que je ferai au cours des prochains mois (le payload iBEX par exemple qui facilitera grandement les choses mais que je dois finir car il ne fonctionne pas encore complètement mais que je publierai par la suite). 
+![regs](regs.png)
 
 
-### Remerciement
-@matteyeux, @xerub, @nyan_satan, exploit3dguy, @iH8sn0w (qui m'avait donné l'idée de l'ajout d'une fonction de debug il y à quelques années), @nasm
+
+## les payloads...
+
+
+
+Certes les modifications du code source de l'iBoot que nous avons vu précédement sont grandement intéressantes dans un but d'une meilleure compréhesion du boot process des iPhones. En revanche, sans accès à ce SRC ou dans le cas d'un iBoot iOS 10+ ou Aarch64, la meilleure option est à mon sens un payload.
+
+Il est possible d'avoir une base déja prête grâce à iBEX (@xerub) ou StarInjector (@Nyan_satan) qui ont chacun le second est basé sur le premier. (Je vous mettrais les liens vers les deux repos Git)
+
+Il est tout de même nécessaire d'avoir un iBoot/iBEC patché (Je conseille un iBEC au vu de la simplicité de mise en place par rapport à un iBoot mais je vais y revenir.)
+
+
+
+![payload](payload.png)
+
+
+
+Pour lancer un payload dans la console recovery de iBEC, il est necessaire de le patcher afin de supprimer les vérifications de signatures (iBoot32patcher @iH8sn0w), ainsi que d'ajouter un pointeur vers une commande pour charger l'adresse à laquelle sera chargé le payload (les commandes ticket ou go par exemple) 
+
+
+
+`iboot32patcher iBEC.iphone5.RELEASE.dfu. iBECpatch -c ticket 0x80000000`
+
+
+
+Après avoir patché le bootloader il suffit de le replacer dans un conteneur img3 grâce à `image3maker` et de l'envoyer via `iRecovery` après avoir chargé un iBSS patché en pwndfu checkm8.
+
+Il n'y a plus qu'à envoyer le payload et de de l'éxecuter via la commande `ticket`. Le payload est donc actif, il suffit maintenant d'envoyer des commandes ajoutées après le prefix `debug` que j'ai assigné (c'est un exemple vous pouvez ajouter ce que vous voulez dans le code, c'est personnel).
+
+ 
+
+![payload](payloadcommand.png)
+
+
+
+Comme vous pouvez le voir, j'ai ajouté les commandes `md` (dejà présente dans les versions DEBUG), mais également la commande register que j'avais créé dans le src d'iBoot.
+
+j'ai également implémenté `mw`  de cette manière (en partie) :
+
+
+
+```c
+#define GETREG32(addr) (*((unsigned int*) addr))
+#define SETREG32(addr, val) (*(volatile unsigned int*) addr = val)
+
+
+int do_mw(int argc, struct cmd_arg *args) {
+  
+  if(argc != 3) {
+    printf("usage: mw <address> <value>\n");
+    return 0;
+}
+
+unsigned int address = args[1].u;
+unsigned int value = args[2].u;
+SETREG32(address, value);
+//clear_cpu_caches();
+return 0;
+}
+
+MENU_COMMAND("mw", do_mw, "memory write 32bit")`
+```
+
+La commande est implémenté de manière différente que dans le code d'Apple, mais l'usage est le même. J'ai également implémenté une commanque qui permet de modifier les registres ARM (pc = 0x41414141 ou n'importe quel registre afin de générer des panic dumps)
+
+Sur la notion de payload sur arm32, il n'y a en soit pas vraiment de limite vous pouvez y intégrer à peut près tout ce qui peut vous être utile. J'ai bien personnalisé le miens, je le publierai sur GitHub quand il sera complètement prêt.
+
+
+
+## Ajouter du code directement dans iBoot...
+
+
+
+Comme je l'ai expliqué dans les sections précédentes, il est également possible d'ajouter des fonctions particulière (debug, print la stack et autres...) directement dans un iBoot récupéré dans un fichier IPSW.
+
+En effet comme me l'avait expliqué iH8sn0w il y a quelques années lorsque je lui avait expliqué mon idée d'ajouter des fonctions supplémentaires dans iBoot à des fins de recherche, qu'il était possible de placer un payload dans iBoot au niveau du Apple Root Certificate.
+
+une fois le bootlader patché il suffit d'ajouter un pointeur vers le dit payload afin de pouvoir l'executer au boot
+
+
+
+![CA](CA.png)
+
+
+
+l'intérêt de cette méthode est que l'accès à iBoot est direct en revanche elle permet l'integration de bien moins de fonctions dans le bootloader, elle est plus utile comme vecteur d'exploitation (cf @JonathanSeals).
+
+
+
+
+
 
 
 
