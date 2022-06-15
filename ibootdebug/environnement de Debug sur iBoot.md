@@ -1,6 +1,6 @@
 
 
-# environnement de Debug sur iBoot
+# Environnement de Debug sur iBoot
 
 @at0m741
 
@@ -10,7 +10,7 @@
 
 
 
-iBoot comme vu dans l'article précédent, iBoot est la pièce maîtresse du démarrage de nos appareils apple, il mets en place et s'occupe de bons nombres d'I/O (dont l'UART qui va nous être extrèmement utile ici).
+iBoot comme vu dans l'article précédent, est la pièce maîtresse du démarrage de nos appareils apple, il mets en place et s'occupe de bons nombres d'I/O (dont l'UART qui va nous être extrèmement utile ici).
 
 Dans l'article précédent je vous ai montré l'utilisation de probes SWD afin de pouvoir debugger des appareils CPFM00/01 ou exploités avec Checkm8, l'idée ici est d'apporter des modifications à la bootchain afin de la rendre plus utile à une éventuelle recherche de vulnérabilités. Je vais donc vous expliquer comment j'ai pu obtenir des options supplémentaires dans le bootloader afin d'éviter d'avoir à trouver un de ces câbles magiques.
 
@@ -18,14 +18,30 @@ Dans l'article précédent je vous ai montré l'utilisation de probes SWD afin d
 
 ## premières explorations dans le code source
 
-En 2018 un leaker a publié sur Github le code source (incomplet) d'iBoot iOS 9x, qui après certaines modifications à permis une compilation d'image DEVELOPMENT/DEBUG/RELEASE qui ont pu être booté grâce à kloader et checkm8.
+En 2018 un leaker a publié sur Github le code source (incomplet) d'iBoot iOS 9x, qui après certaines modifications, a permis une compilation d'images DEVELOPMENT/DEBUG/RELEASE qui ont pu être démarrées grâce à kloader et checkm8.
 
-Après quelques recherches dans le code, j'ai cherché à adapter les commandes iBoot DEBUG a une version DEVELOPMENT ou RELEASE au vu de la complexité de faire démarrer des images DEBUG.
+Après quelques recherches dans le code, j'ai cherché à adapter les commandes iBoot DEBUG à une version DEVELOPMENT ou RELEASE au vu de la complexité de faire démarrer des images DEBUG.
 
 
+```c
+#if WITH MENU
+static int do_reset(int argc, struct cm_arg *args)
+{
+	platform quiesce display();
+#if WITH_HW_POWER
+// Clear any pending PMU events
+	power_clr _events(1) ;
+#endif
+	platform system reset(false):
+	return 0:
+7
+static int do_halt(int argc, struct cm_arg *args){}
+halt();
 
-![command](command.png)
-
+MENU_COMMAND(reboot, do_reset, "reboot the device", NULL);
+MENU_COMMAND (reset, do_reset, NULL, NULL);
+MENU_COMMAND_DEVELOPMENT(halt, do_halt, "halt the system (good for JTAG)", NULL);
+```
 
 
 ce qui est assez simple en remplaçant :
@@ -40,9 +56,9 @@ par :
 MENU_COMMAND() ou MENU_COMMAND_DEVELOPMENT
 ```
 
-Néanmoins cette méthode est assez limité au vu de l'inutilité de la plupart des commandes, j'ai donc pensé, par frustration à introduire les miennes.
+Néanmoins cette méthode est assez limité au vu de l'inutilité de la plupart des commandes, j'ai donc pensé, par frustration, à introduire les miennes.
 
-Il est tout de même important de noter que les versions iBoot DEBUG, permettent d'écrire et de lire en mémoire, néanmoins afin d'être démarrés elles nécessitent quelques modifications dans le code source.
+Il est tout de même important de noter que les versions iBoot DEBUG, permettent d'écrire et de lire en mémoire, néanmoins afin d'être démarrés elles nécessitent quelques modifications dans le code source. En effet, lors de mes premières experiences, j'arrivait à faire démarrer le bootloader de manière arbitraire mais j'avais un soucis sur la fonction ```USB_Controler_register()```. Aucun Shell recovery USB ou UART n'était accessible. De plus, la gestion de l'allocation mémoire était catastrophique (soucis que j'ai réglé depuis).
 
 
 
@@ -54,11 +70,11 @@ Il est tout de même important de noter que les versions iBoot DEBUG, permettent
 
 
 
-Comme expliqué, dans les versions de debug sont assez étranges à faire fonctionner néanmoins elles intègrent des commandes interéssantes et ont des privilèges plus élevés par rapport aux versions RELEASE/DEVELOPMENT. 
+Comme j'ai pu l'expliquer, les versions de debug sont assez étranges à faire fonctionner. Néanmoins elles intègrent des commandes interéssantes et ont des privilèges plus élevés par rapport aux versions RELEASE/DEVELOPMENT, notamment sur les accès mémoire et NAND. 
 
 
 
-Les commandes md/mw permettent de lire et d'écrire en memoire ce qui peut s'avérer relativement pratique. En revanche elle ne fonctionnent nativement que sur ces verisons là. Pour ce qui est des versions RELEASE/DEVELOPMENT, il est nécessaire de modifier le code source.
+Les commandes md/mw permettent de lire et d'écrire en memoire, ce qui peut s'avérer relativement pratique. En revanche elle ne fonctionnent nativement que sur ces verisons là. Pour ce qui est des versions RELEASE/DEVELOPMENT, il est nécessaire de modifier le code source sur de nombreux points d'autorisation.
 
 
 
@@ -70,7 +86,7 @@ Les commandes md/mw permettent de lire et d'écrire en memoire ce qui peut s'av�
 
 ### Modifications
 
-Nativement le seul moyen d'obtenir l'état des registres CPU sur iBoot est de générer un paniclog en ajoutant un bp ou par tout autre moyen que j'expliquerai plus tard (pour les BKPT, référez-vous au Payload Cyanide de @Chronic)
+Nativement, le seul moyen d'obtenir l'état des registres CPU sur iBoot est de générer un paniclog en ajoutant un breakpoint ou par tout autre moyen que j'expliquerai plus tard (pour les BKPT, référez-vous au Payload Cyanide de @Chronic). Les Breakpoint peuvent être générés via '__asm__()' avec un fonction d'entrée de données et de jump à une adresse donnée.
 
 
 
@@ -100,7 +116,7 @@ MENU_COMMAND(regs, do_regs, "print registers addresses", NULL);
 
 j'ai donc effectué la même oppération pour tous les registres afin de pouvoir obtenir l'adresse de chacuns des registres grace à `__asm__(`) et de l'afficher via `Printf()`.
 
-J'ai donc utilisé `MENU_COMMAND()`afin d'intégrer la commande aux trois types d'images. (à noter que sur un iBoot RELEASE un câble UART est indispensable sans patchs supplémentaires).
+J'ai ainsi utilisé `MENU_COMMAND()`afin d'intégrer la commande aux trois types d'images. (à noter que sur un iBoot RELEASE un câble UART est indispensable sans patchs supplémentaires).
 
 
 
