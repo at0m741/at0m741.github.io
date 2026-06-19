@@ -1,5 +1,33 @@
-theme: jekyll-theme-slate
+title: "Louis Touzalin / at0m741"
+description: "Low-level systems, compiler infrastructure, numerical relativity, and high-performance C++."
+url: "https://at0m741.github.io"
+baseurl: ""
 
-layout: page
-title: "Environnement de Debug iBoot"
-permalink: /ibootdebug/
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+
+collections:
+  articles:
+    output: true
+    permalink: /articles/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "articles"
+    values:
+      layout: article
+      math: true
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: page
+
+exclude:
+  - README.md

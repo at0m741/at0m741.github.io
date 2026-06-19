@@ -1,0 +1,39 @@
+- title: "Tensorium_lib"
+  description: "High-performance C++ tensor, linear algebra, and numerical relativity library with SIMD, OpenMP/MPI-oriented design, and compiler experimentation."
+  status: "Active"
+  tags:
+    - C++
+    - SIMD
+    - HPC
+    - Numerical relativity
+  url: "https://github.com/at0m741"
+
+- title: "Tensorium compiler / DSL"
+  description: "Experimental compiler infrastructure for tensor calculus, elliptic systems, spectral methods, and numerical relativity workflows."
+  status: "Research"
+  tags:
+    - DSL
+    - Tensor calculus
+    - Spectral methods
+    - Compilers
+  url: ""
+
+- title: "MLIR experiments"
+  description: "Experiments around MLIR dialects, lowering pipelines, vectorization, and compiler backends."
+  status: "Research"
+  tags:
+    - MLIR
+    - LLVM
+    - Vectorization
+    - Lowering
+  url: ""
+
+- title: "iBoot / iOS low-level security notes"
+  description: "Notes and research around Apple bootchain internals and low-level iOS security."
+  status: "Archive"
+  tags:
+    - iBoot
+    - Bootchain
+    - iOS
+    - Security
+  url: "/articles/"
