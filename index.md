@@ -8,7 +8,7 @@ description: "Personal technical blog for low-level systems, compiler infrastruc
 <section class="home-hero">
   <div class="home-copy">
     <div class="home-kicker">Louis Touzalin / at0m741</div>
-    <h1 class="home-title">Systems notes at the edge of bootchains, compilers, and computational physics.</h1>
+    <h1 class="home-title">Systems notes at the edge of compilers, numerical kernels, and computational physics.</h1>
     <p class="home-lede">
       I write about low-level programming, C/C++ systems work, compiler tooling, Tensorium_lib, MLIR experiments, and numerical relativity workflows that connect tensor calculus with high-performance computation.
     </p>
@@ -19,11 +19,11 @@ description: "Personal technical blog for low-level systems, compiler infrastruc
     </div>
   </div>
   <div class="home-lab" aria-label="Technical focus map">
-    <img src="{{ '/assets/img/systems-map.svg' | relative_url }}" alt="Systems map connecting iBoot, MLIR, Tensorium, HPC, and numerical relativity">
+    <img src="{{ '/assets/img/systems-map.svg' | relative_url }}" alt="Systems map connecting C++, MLIR, Tensorium, HPC, and numerical relativity">
     <div class="lab-readout">
       <span>stack: C / C++ / MLIR</span>
       <span>runtime: SIMD / OpenMP / MPI</span>
-      <span>domain: GR / tensors / bootchains</span>
+      <span>domain: GR / tensors / kernels</span>
     </div>
   </div>
 </section>
@@ -33,8 +33,8 @@ description: "Personal technical blog for low-level systems, compiler infrastruc
 <div class="section-row">
   <div class="focus-card">
     <div class="project-meta">Systems</div>
-    <h3>iBoot, bootchains, low-level debugging</h3>
-    <p>Archived notes around low-level iOS security, Apple bootchain internals, and debugging near the hardware boundary.</p>
+    <h3>C/C++ systems programming</h3>
+    <p>Notes around memory layout, runtime behavior, low-level performance constraints, and code that stays close to the hardware boundary.</p>
   </div>
   <div class="focus-card">
     <div class="project-meta">Compilers</div>
@@ -53,14 +53,14 @@ description: "Personal technical blog for low-level systems, compiler infrastruc
   </div>
 </div>
 
-## Latest articles
+## Article queue
 
 <div class="article-list">
 {% assign listed_articles = site.articles | where_exp: "article", "article.index_page != true" %}
-{% assign latest_articles = listed_articles | where_exp: "article", "article.status != 'planned'" | sort: "date" | reverse %}
-{% for article in latest_articles limit: 4 %}
+{% assign article_queue = listed_articles | sort: "date" | reverse %}
+{% for article in article_queue limit: 4 %}
   <article class="article-item">
-    <div class="meta-line">{{ article.date | date: "%Y-%m-%d" }} · {{ article.language }}</div>
+    <div class="meta-line">{{ article.date | date: "%Y-%m-%d" }} · {{ article.language }}{% if article.status == "planned" %} · planned{% endif %}</div>
     <h3><a href="{{ article.url | relative_url }}">{{ article.title }}</a></h3>
     <p>{{ article.description }}</p>
     <div class="tag-list">

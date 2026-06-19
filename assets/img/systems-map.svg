@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 560" role="img" aria-labelledby="title desc">
   <title id="title">Systems map for at0m741</title>
-  <desc id="desc">A technical map linking bootchain research, MLIR, Tensorium, HPC kernels, and numerical relativity.</desc>
+  <desc id="desc">A technical map linking C++ systems work, MLIR, Tensorium, HPC kernels, and numerical relativity.</desc>
   <rect width="920" height="560" fill="#0b0f10"/>
   <path d="M72 88H848M72 168H848M72 248H848M72 328H848M72 408H848M152 48V512M272 48V512M392 48V512M512 48V512M632 48V512M752 48V512" stroke="#182320" stroke-width="1"/>
   <rect x="72" y="68" width="776" height="424" rx="10" fill="#101617" stroke="#2b3b37" stroke-width="2"/>
@@ -15,8 +15,8 @@
   <circle cx="460" cy="330" r="7" fill="#74d4c0"/>
   <circle cx="218" cy="206" r="6" fill="#d8ad5b"/>
   <circle cx="704" cy="206" r="6" fill="#d8ad5b"/>
-  <text x="218" y="146" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="17" fill="#d8ad5b">bootchain</text>
-  <text x="218" y="174" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="26" fill="#eef4f1">iBoot</text>
+  <text x="218" y="146" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="17" fill="#d8ad5b">systems</text>
+  <text x="218" y="174" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="26" fill="#eef4f1">C/C++</text>
   <text x="704" y="146" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="17" fill="#d8ad5b">compiler</text>
   <text x="704" y="174" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="26" fill="#eef4f1">MLIR</text>
   <text x="460" y="270" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="17" fill="#d8ad5b">core</text>

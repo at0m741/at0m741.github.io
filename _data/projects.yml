@@ -28,12 +28,12 @@
     - Lowering
   url: ""
 
-- title: "iBoot / iOS low-level security notes"
-  description: "Notes and research around Apple bootchain internals and low-level iOS security."
-  status: "Archive"
+- title: "HPC / SIMD numerical kernels"
+  description: "Experiments around cache-aware kernels, vectorization, OpenMP/MPI-oriented execution, and performance constraints in numerical code."
+  status: "Research"
   tags:
-    - iBoot
-    - Bootchain
-    - iOS
-    - Security
-  url: "/articles/"
+    - C++
+    - SIMD
+    - OpenMP
+    - MPI
+  url: ""

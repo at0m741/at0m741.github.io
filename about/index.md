@@ -20,4 +20,4 @@ A recurring theme in my work is building tools that connect theoretical physics 
 
 ## Systems work
 
-I also keep notes on low-level iOS security, iBoot, bootchain internals, and systems debugging. Some older articles are preserved in French for now; the site structure is prepared for English versions later.
+I use systems programming as a way to make numerical and compiler ideas concrete: data layout, memory behavior, vectorization, runtime constraints, and the engineering details that decide whether an implementation remains practical.
