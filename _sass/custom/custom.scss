@@ -70,34 +70,6 @@
   margin-top: 1.35rem;
 }
 
-.home-lab {
-  overflow: hidden;
-  border: 1px solid #24302d;
-  border-radius: 8px;
-  background: #0d1213;
-}
-
-.home-lab img {
-  width: 100%;
-  border: 0;
-  border-radius: 0;
-}
-
-.lab-readout {
-  display: grid;
-  gap: 0.35rem;
-  padding: 0.8rem 0.9rem;
-  border-top: 1px solid #24302d;
-  color: #aebbb5;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-  font-size: 0.76rem;
-}
-
-.lab-readout span::before {
-  color: #74d4c0;
-  content: "$ ";
-}
-
 .index-readout {
   display: flex;
   flex-wrap: wrap;

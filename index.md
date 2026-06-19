@@ -18,14 +18,6 @@ description: "Personal technical blog for low-level systems, compiler infrastruc
       <a class="btn" href="https://github.com/at0m741">GitHub</a>
     </div>
   </div>
-  <div class="home-lab" aria-label="Computational pipeline map">
-    <img src="{{ '/assets/img/compute-pipeline.svg' | relative_url }}" alt="Computational pipeline connecting tensor calculus, Tensorium, MLIR, C++, SIMD, MPI, and numerical relativity">
-    <div class="lab-readout">
-      <span>stack: C / C++ / MLIR</span>
-      <span>runtime: SIMD / OpenMP / MPI</span>
-      <span>domain: GR / tensors / kernels</span>
-    </div>
-  </div>
 </section>
 
 ## Current focus
