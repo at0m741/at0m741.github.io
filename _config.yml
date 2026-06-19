@@ -4,7 +4,7 @@ url: "https://at0m741.github.io"
 baseurl: ""
 
 remote_theme: just-the-docs/just-the-docs
-color_scheme: dark
+color_scheme: at0m
 search_enabled: true
 heading_anchors: true
 

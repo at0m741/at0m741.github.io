@@ -5,35 +5,71 @@ nav_order: 1
 description: "Personal technical blog for low-level systems, compiler infrastructure, numerical relativity, and high-performance C++."
 ---
 
-# Louis Touzalin / at0m741
+<section class="home-hero">
+  <div class="home-kicker">Louis Touzalin / at0m741</div>
+  <h1 class="home-title">Low-level systems, compiler infrastructure, numerical relativity, and high-performance C++.</h1>
+  <p class="home-lede">
+    I write about low-level programming, C/C++ systems work, compiler tooling, Tensorium_lib, MLIR experiments, and numerical relativity workflows that connect tensor calculus with high-performance computation.
+  </p>
+  <div class="home-actions">
+    <a class="btn btn-primary" href="{{ '/articles/' | relative_url }}">Read articles</a>
+    <a class="btn" href="{{ '/projects/' | relative_url }}">View projects</a>
+    <a class="btn" href="https://github.com/at0m741">GitHub</a>
+  </div>
+</section>
 
-Low-level systems, compiler infrastructure, numerical relativity, and high-performance C++.
+## Current focus
 
-I work on low-level programming, C/C++ systems code, compiler tooling, Tensorium_lib, MLIR experiments, and numerical relativity workflows that connect tensor calculus with high-performance computation.
-
-[Read articles]({{ '/articles/' | relative_url }}){: .btn .btn-primary }
-[View projects]({{ '/projects/' | relative_url }}){: .btn }
-[GitHub](https://github.com/at0m741){: .btn }
+<div class="section-row">
+  <div class="focus-card">
+    <div class="project-meta">Systems</div>
+    <h3>iBoot, bootchains, low-level debugging</h3>
+    <p>Archived notes around low-level iOS security, Apple bootchain internals, and debugging near the hardware boundary.</p>
+  </div>
+  <div class="focus-card">
+    <div class="project-meta">Compilers</div>
+    <h3>MLIR, DSLs, tensor code generation</h3>
+    <p>Experiments around compiler infrastructure for tensor calculus, lowering pipelines, vectorization, and backend design.</p>
+  </div>
+  <div class="focus-card">
+    <div class="project-meta">HPC</div>
+    <h3>Tensorium_lib and numerical kernels</h3>
+    <p>High-performance C++ tensor and linear algebra work with SIMD, OpenMP/MPI-oriented design, and computational physics constraints.</p>
+  </div>
+  <div class="focus-card">
+    <div class="project-meta">Physics</div>
+    <h3>Numerical relativity from first principles</h3>
+    <p>Notes on tensor calculus, general relativity, black hole simulations, elliptic systems, and spectral methods.</p>
+  </div>
+</div>
 
 ## Latest articles
 
+<div class="article-list">
 {% assign listed_articles = site.articles | where_exp: "article", "article.index_page != true" %}
 {% assign latest_articles = listed_articles | where_exp: "article", "article.status != 'planned'" | sort: "date" | reverse %}
 {% for article in latest_articles limit: 4 %}
-- [{{ article.title }}]({{ article.url | relative_url }})
-  {{ article.date | date: "%Y-%m-%d" }} · {{ article.language }} · {{ article.description }}
+  <article class="article-item">
+    <div class="meta-line">{{ article.date | date: "%Y-%m-%d" }} · {{ article.language }}</div>
+    <h3><a href="{{ article.url | relative_url }}">{{ article.title }}</a></h3>
+    <p>{{ article.description }}</p>
+    <div class="tag-list">
+      {% for tag in article.tags limit: 5 %}
+        <span>{{ tag }}</span>
+      {% endfor %}
+    </div>
+  </article>
 {% endfor %}
+</div>
 
-## Research / projects
+## Project index
 
-- **Tensorium_lib**: high-performance C++ tensor, linear algebra, and numerical relativity library.
-- **Tensorium compiler / DSL**: compiler infrastructure for tensor calculus and numerical relativity workflows.
-- **MLIR experiments**: dialects, lowering pipelines, vectorization, and backend experiments.
-- **iBoot / iOS low-level security notes**: archived notes around Apple bootchain internals.
-
-## Site contents
-
-- [Articles]({{ '/articles/' | relative_url }})
-- [Projects]({{ '/projects/' | relative_url }})
-- [Links]({{ '/links/' | relative_url }})
-- [About]({{ '/about/' | relative_url }})
+<div class="project-list">
+{% for project in site.data.projects limit: 4 %}
+  <article class="project-item">
+    <div class="project-meta">{{ project.status }}</div>
+    <h3>{{ project.title }}</h3>
+    <p>{{ project.description }}</p>
+  </article>
+{% endfor %}
+</div>
