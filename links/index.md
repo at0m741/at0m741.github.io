@@ -8,6 +8,11 @@ description: "Contact points, repositories, and future papers or notes."
 
 # Links
 
+<div class="index-readout">
+  <span>public entry points</span>
+  <span>repositories, papers, notes, contact</span>
+</div>
+
 <div class="link-list">
   <article class="link-item">
     <div class="project-meta">GitHub</div>

@@ -8,6 +8,12 @@ description: "Research and engineering work around high-performance C++, compile
 
 # Projects
 
+<div class="index-readout">
+  <span>axis: systems -> compilers -> HPC</span>
+  <span>language: C / C++ / MLIR</span>
+  <span>domain: tensor calculus and numerical relativity</span>
+</div>
+
 <div class="project-list">
 {% for project in site.data.projects %}
   <article class="project-item">

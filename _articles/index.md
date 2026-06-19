@@ -12,6 +12,12 @@ description: "Technical notes and research logs."
 
 Existing French iBoot/iOS articles are preserved here as normal articles. English translations can be added later without changing the site structure.
 
+<div class="index-readout">
+  <span>archive: iBoot / low-level iOS</span>
+  <span>incoming: Tensorium / MLIR / numerical relativity</span>
+  <span>format: notes, experiments, implementation logs</span>
+</div>
+
 <div class="article-list">
 {% assign articles = site.articles | where_exp: "article", "article.index_page != true" | sort: "date" | reverse %}
 {% for article in articles %}

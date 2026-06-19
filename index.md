@@ -6,15 +6,25 @@ description: "Personal technical blog for low-level systems, compiler infrastruc
 ---
 
 <section class="home-hero">
-  <div class="home-kicker">Louis Touzalin / at0m741</div>
-  <h1 class="home-title">Low-level systems, compiler infrastructure, numerical relativity, and high-performance C++.</h1>
-  <p class="home-lede">
-    I write about low-level programming, C/C++ systems work, compiler tooling, Tensorium_lib, MLIR experiments, and numerical relativity workflows that connect tensor calculus with high-performance computation.
-  </p>
-  <div class="home-actions">
-    <a class="btn btn-primary" href="{{ '/articles/' | relative_url }}">Read articles</a>
-    <a class="btn" href="{{ '/projects/' | relative_url }}">View projects</a>
-    <a class="btn" href="https://github.com/at0m741">GitHub</a>
+  <div class="home-copy">
+    <div class="home-kicker">Louis Touzalin / at0m741</div>
+    <h1 class="home-title">Systems notes at the edge of bootchains, compilers, and computational physics.</h1>
+    <p class="home-lede">
+      I write about low-level programming, C/C++ systems work, compiler tooling, Tensorium_lib, MLIR experiments, and numerical relativity workflows that connect tensor calculus with high-performance computation.
+    </p>
+    <div class="home-actions">
+      <a class="btn btn-primary" href="{{ '/articles/' | relative_url }}">Read articles</a>
+      <a class="btn" href="{{ '/projects/' | relative_url }}">View projects</a>
+      <a class="btn" href="https://github.com/at0m741">GitHub</a>
+    </div>
+  </div>
+  <div class="home-lab" aria-label="Technical focus map">
+    <img src="{{ '/assets/img/systems-map.svg' | relative_url }}" alt="Systems map connecting iBoot, MLIR, Tensorium, HPC, and numerical relativity">
+    <div class="lab-readout">
+      <span>stack: C / C++ / MLIR</span>
+      <span>runtime: SIMD / OpenMP / MPI</span>
+      <span>domain: GR / tensors / bootchains</span>
+    </div>
   </div>
 </section>
 
