@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 560" role="img" aria-labelledby="title desc">
+  <title id="title">Computational pipeline for at0m741</title>
+  <desc id="desc">A technical pipeline connecting tensor calculus, Tensorium, MLIR lowering, vector kernels, and numerical relativity.</desc>
+  <rect width="920" height="560" fill="#0b0f10"/>
+  <path d="M80 96H840M80 176H840M80 256H840M80 336H840M80 416H840M160 64V496M300 64V496M440 64V496M580 64V496M720 64V496" stroke="#182320" stroke-width="1"/>
+  <rect x="76" y="70" width="768" height="420" rx="10" fill="#101617" stroke="#2b3b37" stroke-width="2"/>
+
+  <rect x="118" y="124" width="142" height="92" rx="6" fill="#0d1213" stroke="#315249"/>
+  <rect x="296" y="124" width="142" height="92" rx="6" fill="#0d1213" stroke="#315249"/>
+  <rect x="474" y="124" width="142" height="92" rx="6" fill="#0d1213" stroke="#315249"/>
+  <rect x="652" y="124" width="142" height="92" rx="6" fill="#0d1213" stroke="#315249"/>
+
+  <rect x="206" y="322" width="170" height="94" rx="6" fill="#0d1213" stroke="#55452a"/>
+  <rect x="544" y="322" width="170" height="94" rx="6" fill="#0d1213" stroke="#55452a"/>
+
+  <path d="M260 170H296M438 170H474M616 170H652" stroke="#74d4c0" stroke-width="3" stroke-linecap="round"/>
+  <path d="M367 216V274H291V322M545 216V274H629V322" fill="none" stroke="#d8ad5b" stroke-width="2" stroke-linecap="round"/>
+  <path d="M376 369H544" stroke="#74d4c0" stroke-width="3" stroke-linecap="round"/>
+
+  <circle cx="296" cy="170" r="6" fill="#74d4c0"/>
+  <circle cx="474" cy="170" r="6" fill="#74d4c0"/>
+  <circle cx="652" cy="170" r="6" fill="#74d4c0"/>
+  <circle cx="291" cy="322" r="6" fill="#d8ad5b"/>
+  <circle cx="629" cy="322" r="6" fill="#d8ad5b"/>
+
+  <text x="189" y="153" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="15" fill="#d8ad5b">math</text>
+  <text x="189" y="181" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="22" fill="#eef4f1">Tensors</text>
+  <text x="367" y="153" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="15" fill="#d8ad5b">library</text>
+  <text x="367" y="181" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="22" fill="#eef4f1">Tensorium</text>
+  <text x="545" y="153" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="15" fill="#d8ad5b">lowering</text>
+  <text x="545" y="181" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="22" fill="#eef4f1">MLIR</text>
+  <text x="723" y="153" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="15" fill="#d8ad5b">backend</text>
+  <text x="723" y="181" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="22" fill="#eef4f1">C++</text>
+
+  <text x="291" y="357" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="15" fill="#d8ad5b">execution</text>
+  <text x="291" y="385" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="22" fill="#eef4f1">SIMD / MPI</text>
+  <text x="629" y="357" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="15" fill="#d8ad5b">domain</text>
+  <text x="629" y="385" text-anchor="middle" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="22" fill="#eef4f1">Relativity</text>
+
+  <text x="96" y="528" font-family="SFMono-Regular, Consolas, Menlo, monospace" font-size="15" fill="#7f928a">pipeline:// tensor calculus -> IR -> vector kernels -> simulation</text>
+</svg>
