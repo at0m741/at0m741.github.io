@@ -45,14 +45,14 @@ description: "Personal technical blog for low-level systems, compiler infrastruc
   </div>
 </div>
 
-## Article queue
+## Latest articles
 
 <div class="article-list">
 {% assign listed_articles = site.articles | where_exp: "article", "article.index_page != true" %}
-{% assign article_queue = listed_articles | sort: "date" | reverse %}
-{% for article in article_queue limit: 4 %}
+{% assign published_articles = listed_articles | where_exp: "article", "article.status != 'planned'" | sort: "date" | reverse %}
+{% for article in published_articles limit: 4 %}
   <article class="article-item">
-    <div class="meta-line">{{ article.date | date: "%Y-%m-%d" }} · {{ article.language }}{% if article.status == "planned" %} · planned{% endif %}</div>
+    <div class="meta-line">{{ article.date | date: "%Y-%m-%d" }} · {{ article.language }}</div>
     <h3><a href="{{ article.url | relative_url }}">{{ article.title }}</a></h3>
     <p>{{ article.description }}</p>
     <div class="tag-list">

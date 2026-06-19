@@ -18,7 +18,7 @@ Technical notes and implementation logs. The current queue is focused on Tensori
 </div>
 
 <div class="article-list">
-{% assign articles = site.articles | where_exp: "article", "article.index_page != true" | sort: "date" | reverse %}
+{% assign articles = site.articles | where_exp: "article", "article.index_page != true" | sort: "nav_order" %}
 {% for article in articles %}
   <article class="article-item">
     <div class="meta-line">
