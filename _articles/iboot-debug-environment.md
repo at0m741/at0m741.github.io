@@ -1,12 +1,13 @@
-
 ---
-layout: article
+layout: default
 title: "Environnement de Debug sur iBoot"
 description: "Archived French article about iBoot debug environments, bootchain modifications, custom commands, and payload-based debugging."
 date: 2021-07-02
 language: FR
 lang: fr
 translation_todo: true
+parent: Articles
+nav_order: 2
 tags:
   - iBoot
   - iOS
@@ -15,6 +16,7 @@ tags:
   - debugging
 ---
 
+_English translation planned. This archived article is currently kept in French._
 
 # Environnement de Debug sur iBoot
 

@@ -1,11 +1,13 @@
 ---
-layout: article
+layout: default
 title: "Debugging de bas niveau sur iOS"
-description: "Archived French article about low-level iOS debugging, iBoot, Lightning accessories, SWD access, and checkm8-based demotion."
+description: "Former home page article, archived in French, about low-level iOS debugging, iBoot, Lightning accessories, SWD access, and checkm8-based demotion."
 date: 2021-01-20
 language: FR
 lang: fr
 translation_todo: true
+parent: Articles
+nav_order: 1
 tags:
   - iBoot
   - iOS
@@ -13,6 +15,8 @@ tags:
   - SWD
   - checkm8
 ---
+
+_English translation planned. This is the former home page article, preserved as a normal article in the new site structure._
 
 ### Debugging de bas niveau sur iOS
 

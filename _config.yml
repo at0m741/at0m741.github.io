@@ -3,6 +3,18 @@ description: "Low-level systems, compiler infrastructure, numerical relativity, 
 url: "https://at0m741.github.io"
 baseurl: ""
 
+remote_theme: just-the-docs/just-the-docs
+color_scheme: dark
+search_enabled: true
+heading_anchors: true
+
+aux_links:
+  "GitHub":
+    - "https://github.com/at0m741"
+
+plugins:
+  - jekyll-remote-theme
+
 markdown: kramdown
 highlighter: rouge
 
@@ -16,18 +28,25 @@ collections:
     output: true
     permalink: /articles/:name/
 
+just_the_docs:
+  collections:
+    articles:
+      name: Articles
+      nav_fold: false
+
 defaults:
   - scope:
       path: ""
       type: "articles"
     values:
-      layout: article
+      layout: default
+      has_toc: true
       math: true
   - scope:
       path: ""
       type: "pages"
     values:
-      layout: page
+      layout: default
 
 exclude:
   - README.md

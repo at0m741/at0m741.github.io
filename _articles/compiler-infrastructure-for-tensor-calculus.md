@@ -1,11 +1,13 @@
 ---
-layout: article
+layout: default
 title: "Compiler infrastructure for tensor calculus"
 description: "Planned notes on compiler and DSL infrastructure for symbolic tensor expressions and high-performance kernels."
 date: 2026-06-19
 language: EN
 lang: en
 status: planned
+parent: Articles
+nav_order: 13
 tags:
   - compilers
   - DSL
