@@ -229,6 +229,63 @@
   border-radius: 6px;
 }
 
+.paper-callout {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 78ch;
+  margin: 1rem 0 1.7rem;
+  padding: 1rem;
+  border: 1px solid #315249;
+  border-left: 4px solid #74d4c0;
+  border-radius: 6px;
+  background: #0f1818;
+}
+
+.paper-callout strong {
+  display: block;
+  color: #eef4f1;
+  font-size: 1rem;
+}
+
+.paper-callout p {
+  margin: 0.35rem 0 0;
+  color: #aebbb5;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.paper-eyebrow {
+  margin-bottom: 0.25rem;
+  color: #d8ad5b;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.paper-button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.4rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid #74d4c0;
+  border-radius: 5px;
+  background: #74d4c0;
+  color: #07100f !important;
+  font-weight: 700;
+  text-decoration: none !important;
+}
+
+.paper-button:hover {
+  background: #9be4d5;
+  border-color: #9be4d5;
+}
+
 .main-content mjx-container[jax="CHTML"] {
   color: #edf6f2;
   font-size: 104% !important;
@@ -371,6 +428,15 @@
 
   .main-content h1 {
     font-size: 1.85rem;
+  }
+
+  .paper-callout {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .paper-button {
+    width: 100%;
   }
 
   .section-row {

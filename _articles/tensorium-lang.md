@@ -16,7 +16,14 @@ tags:
   - compiler infrastructure
 ---
 
-[Full paper PDF]({{ '/assets/papers/tensorium-lang.pdf' | relative_url }})
+<div class="paper-callout">
+  <div>
+    <div class="paper-eyebrow">Full paper</div>
+    <strong>Read the complete Tensorium_lang draft as a PDF.</strong>
+    <p>This page is a condensed web version. The PDF keeps the longer compiler notes, appendix, and reference details.</p>
+  </div>
+  <a class="paper-button" href="{{ '/assets/papers/tensorium-lang.pdf' | relative_url }}">Open PDF</a>
+</div>
 
 `Tensorium_lang` is an experimental DSL for making tensorial structure visible
 to the compiler. The goal is not to replace a numerical-relativity framework.
