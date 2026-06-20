@@ -1,4 +1,18 @@
 <link rel="icon" type="image/jpeg" href="{{ '/assets/img/avatar.jpeg' | relative_url }}">
+<link rel="apple-touch-icon" href="{{ '/assets/img/avatar.jpeg' | relative_url }}">
+{% assign preview_image = page.image | default: '/assets/img/avatar.jpeg' %}
+{% assign preview_title = page.title | default: site.title %}
+{% assign preview_description = page.description | default: site.description %}
+<meta property="og:type" content="{% if page.collection == 'articles' %}article{% else %}website{% endif %}">
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:title" content="{{ preview_title | escape }}">
+<meta property="og:description" content="{{ preview_description | escape }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:image" content="{{ preview_image | absolute_url }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ preview_title | escape }}">
+<meta name="twitter:description" content="{{ preview_description | escape }}">
+<meta name="twitter:image" content="{{ preview_image | absolute_url }}">
 <script>
   window.MathJax = {
     tex: {

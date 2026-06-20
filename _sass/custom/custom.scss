@@ -1,5 +1,9 @@
+.main-content-wrap {
+  max-width: 1320px;
+}
+
 .main-content {
-  max-width: 980px;
+  max-width: 1240px;
   color: #2f3a36;
   font-size: 16px;
   line-height: 1.7;
@@ -7,7 +11,7 @@
 
 .main-content p,
 .main-content li {
-  max-width: 78ch;
+  max-width: 92ch;
 }
 
 .main-content h1,
@@ -98,17 +102,17 @@
 }
 
 .home-title {
-  max-width: 940px;
+  max-width: 1120px;
   margin: 0.4rem 0 1rem;
   color: #17201d;
-  font-size: 2.75rem;
+  font-size: 3.1rem;
   line-height: 1.08;
 }
 
 .home-lede {
-  max-width: 900px;
+  max-width: 1060px;
   color: #52605b;
-  font-size: 1.08rem;
+  font-size: 1.14rem;
 }
 
 .home-actions {
@@ -148,6 +152,11 @@
   display: grid;
   gap: 0.85rem;
   margin: 1rem 0 2rem;
+}
+
+.project-list,
+.link-list {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 .article-item,
@@ -412,12 +421,22 @@
 }
 
 .main-content blockquote {
-  max-width: 78ch;
+  max-width: 92ch;
   margin-left: 0;
   padding: 0.65rem 1rem;
   border-left: 3px solid #8a5a00;
   background: #fff8e8;
   color: #52605b;
+}
+
+@media (min-width: 1180px) {
+  .section-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .article-list {
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  }
 }
 
 @media (max-width: 720px) {
