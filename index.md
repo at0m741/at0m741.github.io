@@ -8,9 +8,9 @@ description: "Personal technical blog for low-level systems, compiler infrastruc
 <section class="home-hero">
   <div class="home-copy">
     <div class="home-kicker">Louis Touzalin</div>
-    <h1 class="home-title">Systems notes at the edge of compilers, numerical kernels, and computational physics.</h1>
+    <h1 class="home-title">Compiler infrastructure and numerical software for tensor-based computation.</h1>
     <p class="home-lede">
-      I am the creator of the open-source TensoriumCore foundation, where I work on low-level programming, C/C++ systems code, compiler tooling, Tensorium_lib, MLIR experiments, and numerical relativity workflows that connect tensor calculus with high-performance computation.
+      I am the creator of the open-source TensoriumCore foundation. My work focuses on Tensorium_lib, Tensorium_lang, MLIR-based compiler infrastructure, high-performance C++ kernels, and numerical relativity workflows for BSSN/Z4-style systems.
     </p>
     <div class="home-actions">
       <a class="btn btn-primary" href="{{ '/articles/' | relative_url }}">Read articles</a>
@@ -18,9 +18,6 @@ description: "Personal technical blog for low-level systems, compiler infrastruc
       <a class="btn" href="https://github.com/TensoriumCore">TensoriumCore</a>
       <a class="btn" href="https://github.com/at0m741">GitHub</a>
     </div>
-  </div>
-  <div class="home-avatar" aria-label="Louis Touzalin site avatar">
-    <img src="{{ '/assets/img/avatar.jpeg' | relative_url }}" alt="Louis Touzalin avatar">
   </div>
 </section>
 
