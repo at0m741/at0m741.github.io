@@ -49,7 +49,7 @@ description: "Personal technical blog for low-level systems, compiler infrastruc
 
 <div class="article-list">
 {% assign listed_articles = site.articles | where_exp: "article", "article.index_page != true" %}
-{% assign published_articles = listed_articles | where_exp: "article", "article.status != 'planned'" | sort: "date" | reverse %}
+{% assign published_articles = listed_articles | sort: "date" | reverse %}
 {% for article in published_articles limit: 4 %}
   <article class="article-item">
     <div class="meta-line">{{ article.date | date: "%Y-%m-%d" }} · {{ article.language }}</div>
