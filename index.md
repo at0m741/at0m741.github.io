@@ -10,11 +10,12 @@ description: "Personal technical blog for low-level systems, compiler infrastruc
     <div class="home-kicker">Louis Touzalin</div>
     <h1 class="home-title">Systems notes at the edge of compilers, numerical kernels, and computational physics.</h1>
     <p class="home-lede">
-      I write about low-level programming, C/C++ systems work, compiler tooling, Tensorium_lib, MLIR experiments, and numerical relativity workflows that connect tensor calculus with high-performance computation.
+      I am the creator of the open-source TensoriumCore foundation, where I work on low-level programming, C/C++ systems code, compiler tooling, Tensorium_lib, MLIR experiments, and numerical relativity workflows that connect tensor calculus with high-performance computation.
     </p>
     <div class="home-actions">
       <a class="btn btn-primary" href="{{ '/articles/' | relative_url }}">Read articles</a>
       <a class="btn" href="{{ '/projects/' | relative_url }}">View projects</a>
+      <a class="btn" href="https://github.com/TensoriumCore">TensoriumCore</a>
       <a class="btn" href="https://github.com/at0m741">GitHub</a>
     </div>
   </div>
@@ -39,7 +40,7 @@ description: "Personal technical blog for low-level systems, compiler infrastruc
   <div class="focus-card">
     <div class="project-meta">HPC</div>
     <h3>Tensorium_lib and numerical kernels</h3>
-    <p>High-performance C++ tensor and linear algebra work with SIMD, OpenMP/MPI-oriented design, and computational physics constraints.</p>
+    <p>Open-source TensoriumCore work around high-performance C++ tensor and linear algebra kernels, SIMD, and computational physics constraints.</p>
   </div>
   <div class="focus-card">
     <div class="project-meta">Physics</div>
