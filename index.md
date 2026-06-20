@@ -7,7 +7,7 @@ description: "Personal technical blog for low-level systems, compiler infrastruc
 
 <section class="home-hero">
   <div class="home-copy">
-    <div class="home-kicker">Louis Touzalin / at0m741</div>
+    <div class="home-kicker">Louis Touzalin</div>
     <h1 class="home-title">Systems notes at the edge of compilers, numerical kernels, and computational physics.</h1>
     <p class="home-lede">
       I write about low-level programming, C/C++ systems work, compiler tooling, Tensorium_lib, MLIR experiments, and numerical relativity workflows that connect tensor calculus with high-performance computation.
@@ -18,8 +18,8 @@ description: "Personal technical blog for low-level systems, compiler infrastruc
       <a class="btn" href="https://github.com/at0m741">GitHub</a>
     </div>
   </div>
-  <div class="home-avatar" aria-label="at0m741 site avatar">
-    <img src="{{ '/assets/img/avatar.jpeg' | relative_url }}" alt="at0m741 avatar">
+  <div class="home-avatar" aria-label="Louis Touzalin site avatar">
+    <img src="{{ '/assets/img/avatar.jpeg' | relative_url }}" alt="Louis Touzalin avatar">
   </div>
 </section>
 
