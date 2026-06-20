@@ -111,6 +111,28 @@
   margin-top: 1.35rem;
 }
 
+.home-avatar {
+  justify-self: center;
+  width: min(260px, 72vw);
+  aspect-ratio: 1;
+  padding: 0.6rem;
+  border: 1px solid #24302d;
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(116, 212, 192, 0.08), transparent 42%),
+    #0f1516;
+}
+
+.home-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid #315249;
+  border-radius: 6px;
+  background: #f7f7f7;
+}
+
 .index-readout {
   display: flex;
   flex-wrap: wrap;
@@ -420,6 +442,11 @@
 
   .home-title {
     font-size: 2rem;
+  }
+
+  .home-avatar {
+    justify-self: start;
+    width: min(180px, 58vw);
   }
 
   .main-content {

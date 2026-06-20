@@ -18,6 +18,9 @@ description: "Personal technical blog for low-level systems, compiler infrastruc
       <a class="btn" href="https://github.com/at0m741">GitHub</a>
     </div>
   </div>
+  <div class="home-avatar" aria-label="at0m741 site avatar">
+    <img src="{{ '/assets/img/avatar.jpeg' | relative_url }}" alt="at0m741 avatar">
+  </div>
 </section>
 
 ## Current focus
