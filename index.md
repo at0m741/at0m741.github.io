@@ -28,24 +28,24 @@ description: "Personal technical blog for low-level systems, compiler infrastruc
 
 <div class="section-row">
   <div class="focus-card">
-    <div class="project-meta">Systems</div>
-    <h3>C/C++ systems programming</h3>
-    <p>Notes around memory layout, runtime behavior, low-level performance constraints, and code that stays close to the hardware boundary.</p>
-  </div>
-  <div class="focus-card">
-    <div class="project-meta">Compilers</div>
-    <h3>MLIR, DSLs, tensor code generation</h3>
-    <p>Experiments around compiler infrastructure for tensor calculus, lowering pipelines, vectorization, and backend design.</p>
+    <div class="project-meta">Numerical relativity</div>
+    <h3>BSSN/Z4 formulations and relativistic systems</h3>
+    <p>Work on tensor-calculus tooling, constraint systems, BSSN/Z4-style formulations, elliptic problems, and numerical infrastructure for general relativity.</p>
   </div>
   <div class="focus-card">
     <div class="project-meta">HPC</div>
     <h3>Tensorium_lib and numerical kernels</h3>
-    <p>Open-source TensoriumCore work around high-performance C++ tensor and linear algebra kernels, SIMD, and computational physics constraints.</p>
+    <p>TensoriumCore development around tensor and linear-algebra kernels, SIMD-aware layouts, and C++ abstractions for high-performance scientific computing.</p>
   </div>
   <div class="focus-card">
-    <div class="project-meta">Physics</div>
-    <h3>Numerical relativity from first principles</h3>
-    <p>Notes on tensor calculus, general relativity, black hole simulations, elliptic systems, and spectral methods.</p>
+    <div class="project-meta">Compilers</div>
+    <h3>MLIR, DSLs, tensor code generation</h3>
+    <p>Compiler infrastructure for preserving tensor structure through semantic analysis, MLIR dialects, lowering passes, generated kernels, and host ABIs.</p>
+  </div>
+  <div class="focus-card">
+    <div class="project-meta">Systems</div>
+    <h3>C/C++ systems programming</h3>
+    <p>Low-level implementation work around memory layout, ABI boundaries, runtime behavior, and performance constraints close to the hardware.</p>
   </div>
 </div>
 
