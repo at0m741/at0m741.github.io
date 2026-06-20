@@ -1,39 +1,29 @@
 - title: "Tensorium_lib"
-  description: "High-performance C++ tensor, linear algebra, and numerical relativity library with SIMD, OpenMP/MPI-oriented design, and compiler experimentation."
-  status: "Active"
+  description: "High-performance C++ tensor, linear algebra, and numerical relativity library with SIMD-oriented kernels and HPC-focused design."
+  status: "Repository"
   tags:
     - C++
     - SIMD
     - HPC
     - Numerical relativity
-  url: "https://github.com/at0m741"
+  url: "https://github.com/TensoriumCore/Tensorium_lib"
 
-- title: "Tensorium compiler / DSL"
-  description: "Experimental compiler infrastructure for tensor calculus, elliptic systems, spectral methods, and numerical relativity workflows."
-  status: "Research"
+- title: "Tensorium_lang"
+  description: "Experimental compiler and DSL infrastructure for tensor calculus, MLIR lowering, generated kernels, and numerical relativity workflows."
+  status: "Repository"
   tags:
     - DSL
+    - MLIR
     - Tensor calculus
-    - Spectral methods
     - Compilers
-  url: ""
+  url: "https://github.com/TensoriumCore/Tensorium_lang"
 
-- title: "MLIR experiments"
-  description: "Experiments around MLIR dialects, lowering pipelines, vectorization, and compiler backends."
-  status: "Research"
+- title: "MLIR tutorial"
+  description: "Source repository for MLIR tutorial experiments around dialects, lowering pipelines, compiler passes, and backend infrastructure."
+  status: "Repository"
   tags:
     - MLIR
     - LLVM
-    - Vectorization
-    - Lowering
-  url: ""
-
-- title: "HPC / SIMD numerical kernels"
-  description: "Experiments around cache-aware kernels, vectorization, OpenMP/MPI-oriented execution, and performance constraints in numerical code."
-  status: "Research"
-  tags:
-    - C++
-    - SIMD
-    - OpenMP
-    - MPI
-  url: ""
+    - Tutorial
+    - Compilers
+  url: "https://github.com/at0m741/MLIR-tutorial-src"
